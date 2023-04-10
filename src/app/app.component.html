@@ -1,3 +1,27 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <div class="tabs-div">
+    <ion-tab-bar class="tabs" slot="bottom">
+      <ion-tab-button class="link" tab="home">
+        <ion-icon class="image-color" name="home"></ion-icon>
+          <a class="a">Home</a>
+        </ion-tab-button>
+        <ion-tab-button class="image-color" tab="radio">
+          <ion-icon name="search"></ion-icon>
+          <a class="a">Browse</a>
+        </ion-tab-button>
+        <ion-tab-button class="image-color" tab="library">
+          <ion-icon name="library"></ion-icon>
+          <a class="a">Orders</a>
+        </ion-tab-button>
+        <ion-tab-button class="image-color" tab="search">
+          <ion-icon name="cart"></ion-icon>
+          <a class="a">Cart</a>
+        </ion-tab-button>
+        <ion-tab-button class="image-color" tab="search">
+          <ion-icon name="reorder-four"></ion-icon>
+          <a class="a">More</a>
+        </ion-tab-button>
+      </ion-tab-bar>
+  </div>
 </ion-app>
