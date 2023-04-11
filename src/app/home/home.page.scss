@@ -1,27 +1,30 @@
-#container {
-  text-align: center;
+/* IMAGE STYLES */
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.img-logo{
+  height: 80%;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+/* LOOGO */
+
+.logo-container {
+  display: flex;
+  height: 10%;
+  justify-content: center;
+  align-items: center;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+/* H1 Styles */
 
-  color: #8c8c8c;
-
+.h1 {
+  height: 80%;
   margin: 0;
 }
 
-#container a {
-  text-decoration: none;
+
+.card-image {
+  width: 100%;
+}
+
+.card {
+  margin-bottom: 10%;
 }
