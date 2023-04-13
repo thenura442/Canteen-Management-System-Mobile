@@ -1,0 +1,190 @@
+// TABS
+
+* {
+  box-sizing: border-box  ;
+}
+
+.tabs-div {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.tabs {
+  padding: 2px;
+}
+
+.image-color {
+  color: #666666;
+}
+
+.a {
+  margin-top: 5px;
+  font-size: 14px;
+  color:#666666;
+}
+
+
+
+
+
+.container {
+  margin: 2%;
+  margin-bottom: 100px;
+}
+
+
+.h1 {
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+ion-card {
+  padding: 10px;
+  width: 97%;
+}
+
+
+.item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: fit-content;
+  width: 100%;
+}
+
+.upper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: fit-content;
+}
+
+.h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.h3-div {
+  width: 70%;
+  height: fit-content;
+}
+
+.image-div {
+  width: 30%;
+  height: fit-content;
+  display: flex;
+  justify-content: right;
+}
+
+img {
+  width: 100%;
+  max-width: 120px;
+}
+
+
+.lower {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: fit-content;
+  margin-top: 20px;
+}
+
+.lower-inner {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+}
+
+.price-div {
+  width: 30%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+ion-card-subtitle {
+  font-size: 16px;
+}
+
+
+.quantity {
+  width: 70%;
+  max-width: 200px;
+  height: 50px;
+  border: 1px solid #eeeeee;
+  border-radius: 25px;
+  background-color: #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove {
+  width: 30%;
+  max-width: 200px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.update-btn {
+  background-color: #eeeeee;
+  height: 40px;
+}
+
+.right{
+  margin-right: 30px;
+}
+
+.left {
+  margin-left: 30px;
+}
+
+.icon {
+  font-size: 25px;
+  color: black;
+}
+
+.remove-btn {
+  background-color: white;
+}
+
+
+.sub-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center ;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.sub-total {
+  width: 50%;
+  text-align: center;
+  font-size: 22px;
+}
+
+.price {
+  width: 50%;
+  text-align: center;
+  font-size: 21px;
+}
+
+.checkout-btn {
+  background-color: #3CB371;
+  margin: auto;
+  height: 40px;
+  width: 50%;
+  font-size: 22px;
+  max-width: 200px;
+}

@@ -1,0 +1,49 @@
+<ion-header style="position: absolute;">
+  <ion-toolbar class="ion-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-img src="./../../assets/waffle.jpg" alt="Store Picture"></ion-img>
+
+  <div class="container">
+
+    <ion-card>
+      <div class="content" routerLink="/item">
+        <ion-card-header>
+          <ion-card-title>Cheese And Chicken Burger</ion-card-title>
+          <ion-card-subtitle>Rs.760</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          A Burger filled with cream cheese and a chicken patty made up of several ingredients.
+        </ion-card-content>
+      </div>
+    </ion-card>
+    <div class="outer-div">
+      <button class="update-btn" aria-label="Favorite">
+        <ion-icon  class="icon right" name="remove" aria-hidden="true"></ion-icon>
+      </button>
+      {{1}}
+      <button class="update-btn" aria-label="Favorite">
+        <ion-icon class="icon left" name="add" aria-hidden="true"></ion-icon>
+      </button>
+    </div>
+
+    <div>
+      <h3>LKR 1,530</h3>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="add">
+      <button class="btn">Add to Cart</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+

@@ -1,0 +1,41 @@
+ion-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+}
+
+ion-buttons {
+  color: black !important;
+  background-color: white !important;
+  border: 1px solid white !important;
+  border-radius: 50px;
+  padding: 5px;
+}
+
+.container {
+  margin: 2%;
+}
+
+
+.h1 {
+  margin-left: 3%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.ion-card {
+  display: flex;
+  margin-bottom: 5%;
+}
+
+
+.content {
+  width: 60%;
+}
+
+.image-div {
+  width: 40%;
+}
+
+.image {
+  width: 100%;
+}

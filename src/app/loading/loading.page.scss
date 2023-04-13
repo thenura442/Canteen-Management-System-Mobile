@@ -1,0 +1,23 @@
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.inner {
+  height: 500px;
+  display: flex;
+  vertical-align: center;
+
+}
+
+ion-img {
+  width: 60%;
+}
+
+h1 {
+  font-size: 45px;
+  font-weight: bold;
+}
