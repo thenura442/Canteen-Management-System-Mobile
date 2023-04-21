@@ -7,94 +7,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-img src="./../../assets/street store.jpg" alt="Store Picture"></ion-img>
+  <ion-img [src]="stores.url" alt="Store Picture"></ion-img>
 
   <div class="container">
-    <h1 class="h1">Street Food Store</h1>
+    <h1 class="h1">{{stores.vendor_name}}</h1>
 
-    <ion-card>
-      <div class="ion-card" routerLink="/item">
-        <div class="content">
-          <ion-card-header>
-            <ion-card-title>Cheese And Chicken Burger</ion-card-title>
-            <ion-card-subtitle>Rs.760</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </div>
-        <div class="image-div">
-          <img class="image" alt="Food Item Picture" src="./../../assets/street store.jpg" />
-        </div>
-      </div>
-    </ion-card>
 
-    <ion-card>
-      <div class="ion-card" routerLink="/item">
-        <div class="content">
-          <ion-card-header>
-            <ion-card-title>Cheese And Chicken Burger</ion-card-title>
-            <ion-card-subtitle>Rs.760</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </div>
-        <div class="image-div">
-          <img class="image" alt="Food Item Picture" src="./../../assets/waffle.jpg" />
-        </div>
-      </div>
-    </ion-card>
+    <div>
+      <h1 class="h1">{{stores.vendor_name}}</h1>
 
-    <ion-card>
-      <div class="ion-card" routerLink="/item">
-        <div class="content">
-          <ion-card-header>
-            <ion-card-title>Cheese And Chicken Burger</ion-card-title>
-            <ion-card-subtitle>Rs.760</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
+      <ion-card *ngFor="let item of items" [routerLink]="['/item', item.id]">
+        <div class="ion-card">
+          <div class="content">
+            <ion-card-header>
+              <ion-card-title>{{item.item_name}}</ion-card-title>
+              <ion-card-subtitle>{{item.price}}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              {{item.description}}
+            </ion-card-content>
+          </div>
+          <div class="image-div">
+            <img class="image" alt="Food Item Picture" [src]="item.url" />
+          </div>
         </div>
-        <div class="image-div">
-          <img class="image" alt="Food Item Picture" src="./../../assets/indian store.jpg" />
-        </div>
-      </div>
-    </ion-card>
-
-    <ion-card>
-      <div class="ion-card" routerLink="/item">
-        <div class="content">
-          <ion-card-header>
-            <ion-card-title>Cheese And Chicken Burger</ion-card-title>
-            <ion-card-subtitle>Rs.760</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </div>
-        <div class="image-div">
-          <img class="image" alt="Food Item Picture" src="./../../assets/burger.jpg" />
-        </div>
-      </div>
-    </ion-card>
-
-    <ion-card>
-      <div class="ion-card" routerLink="/item">
-        <div class="content">
-          <ion-card-header>
-            <ion-card-title>Cheese And Chicken Burger</ion-card-title>
-            <ion-card-subtitle>Rs.760</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </div>
-        <div class="image-div">
-          <img class="image" alt="Food Item Picture" src="./../../assets/street store.jpg" />
-        </div>
-      </div>
-    </ion-card>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

@@ -19,15 +19,16 @@ export const routes: Routes = [
     loadComponent: () => import('./browse/browse.page').then( m => m.BrowsePage)
   },
   {
-    path: 'store',
+    path: 'store/:id',
     loadComponent: () => import('./store/store.page').then( m => m.StorePage)
   },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
-  },  {
-    path: 'item',
+  },
+  {
+    path: 'item/:id',
     loadComponent: () => import('./item/item.page').then( m => m.ItemPage)
   },
   {

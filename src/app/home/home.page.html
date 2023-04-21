@@ -1,5 +1,6 @@
 <ion-content [fullscreen]="true">
 
+
   <div class="logo-container">
     <img class="img-logo" src="./../../assets/logo-white.png">
     <div class="h1-div">
@@ -7,60 +8,25 @@
     </div>
   </div>
 
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
+    <!-- <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Blank</ion-title>
+      </ion-toolbar>
+    </ion-header> -->
 
-  <ion-card class="card">
-    <img class="card-image" alt="Silhouette of mountains" src="./../../assets/burger.jpg" />
-    <ion-card-header>
-      <ion-card-title>Street Food Store</ion-card-title>
-      <ion-card-subtitle>Chicken Burger </ion-card-subtitle>
-    </ion-card-header>
+    <ion-card class="card" *ngFor="let store of stores" [routerLink]="['/store', store.email]">
+      <img class="card-image" alt="Silhouette of mountains" [src]="store.url" />
+      <ion-card-header>
+        <ion-card-title> {{store.vendor_name}}</ion-card-title>
+        <!-- <ion-card-subtitle>{{store.description}} </ion-card-subtitle> -->
+      </ion-card-header>
 
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
+      <ion-card-content>
+        {{store.description}}
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card class="card">
-    <img class="card-image" alt="Silhouette of mountains" src="./../../assets/waffle.jpg" />
-    <ion-card-header>
-      <ion-card-title>Street Food Store</ion-card-title>
-      <ion-card-subtitle>Chicken Burger </ion-card-subtitle>
-    </ion-card-header>
 
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card class="card">
-    <img class="card-image" alt="Silhouette of mountains" src="./../../assets/street store.jpg" />
-    <ion-card-header>
-      <ion-card-title>Street Food Store</ion-card-title>
-      <ion-card-subtitle>Chicken Burger </ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card style="margin-bottom: 20%;">
-    <img class="card-image" alt="Silhouette of mountains" src="./../../assets/indian store.jpg" />
-    <ion-card-header>
-      <ion-card-title>Street Food Store</ion-card-title>
-      <ion-card-subtitle>Chicken Burger </ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
-</ion-content>
 
 
 <div class="tabs-div">
@@ -86,4 +52,4 @@
         <a class="a">More</a>
       </ion-tab-button>
     </ion-tab-bar>
-</div>>
+</div>
