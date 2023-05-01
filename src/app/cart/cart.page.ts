@@ -28,7 +28,7 @@ export class CartPage{
   email = '';
 
   originalItemForm: Item = {
-    customer_email: "thenura114@gmail.com",
+    customer_email: "",
     store_email: "",
     sub_total: "",
     products: [{
@@ -68,6 +68,9 @@ export class CartPage{
     })
 
     this.cartService.getCart({customer_email: email}).subscribe((result : any) => {
+      if(result == null){
+        return;
+      }
       if(result?.customer_email){
         this.itemForm = result;
         this.items = 0;
@@ -76,11 +79,10 @@ export class CartPage{
           this.categories = this.categories + 1;
           this.items = this.items + Number(result.products[i].quantity)
         }
+        this.vendorService.getVendor({email: result.store_email}).subscribe((vendor : any) => {
+          this.vendorForm = vendor;
+        })
       }
-
-      this.vendorService.getVendor({email: result.store_email}).subscribe((vendor : any) => {
-        this.vendorForm = vendor;
-      })
     })
   }
 
@@ -119,8 +121,10 @@ export class CartPage{
   remove(item_id : any){
     let id = item_id;
     this.cartService.deleteItem({id:id, customer_email: this.itemForm.customer_email}).subscribe((result : any) => {
-      console.log(result);
       this.reload();
+      if(result.deletedCount == 1){
+        this.itemForm = {...this.originalItemForm}
+      }
     })
   }
 
@@ -139,6 +143,9 @@ export class CartPage{
 
   reload(){
     this.cartService.getCart({customer_email: "thenura114@gmail.com"}).subscribe((result : any) => {
+      if(result == null){
+        return;
+      }
       if(result?.customer_email){
         this.itemForm = result;
         this.items = 0;

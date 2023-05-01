@@ -69,6 +69,9 @@ export class ItemPage implements OnInit {
       })
 
       this.cartService.getCart({customer_email: email}).subscribe((cart : any) => {
+        if(cart == null){
+          return;
+        }
         if(cart?.customer_email){
           for (let i = 0; i < cart.products.length; i++) {
             if(cart.products[i].id == this.item_code){
