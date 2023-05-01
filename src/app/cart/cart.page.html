@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
       <ion-title>Cart</ion-title>
     </ion-buttons>
   </ion-toolbar>
@@ -9,149 +8,64 @@
 
 
 <ion-content [fullscreen]="true">
-  <div class="container">
-    <h1 class="h1">Street Food Store</h1>
+  <div class="container" *ngIf="itemForm.store_email !== ''">
+    <h1 class="h1" style="margin-bottom: 5%;">{{ vendorForm.vendor_name }}</h1>
 
-    <h5 class="h1">
-      Items : {{3}} &nbsp; Categories : {{3}}
+    <h1 style="margin-left: 3%; margin-right: 3%;"><img style="width: 100px;" [src]="vendorForm.url"></h1>
+
+    <h5 class="h2">
+      Items : {{items}} &nbsp; Categories : {{categories}}
     </h5>
 
+
     <div class="item-container">
-      <ion-card>
+      <ion-card *ngFor="let item of itemForm.products">
         <div class="upper">
           <div class="h3-div">
-            <h3 class="h3">Chicken and Cheese Pizza Pasta Cream </h3>
+            <h3 class="h3">{{item.item_name}}</h3>
           </div>
           <div class="image-div">
-            <img src="./../../assets/street store.jpg" alt="Item Picture">
+            <img [src]="item.url" alt="Item Picture">
           </div>
         </div>
         <div class="lower">
           <div class="lower-inner">
             <div class="quantity">
-              <button class="update-btn" aria-label="Favorite">
+              <button class="update-btn" aria-label="Favorite" [ngClass]="item.quantity !== '1' ? 'update-btn' : 'disabled'" (click)="minus(item.id)">
                 <ion-icon  class="icon right" name="remove" aria-hidden="true"></ion-icon>
               </button>
-              {{1}}
-              <button class="update-btn" aria-label="Favorite">
+              {{item.quantity}}
+              <button class="update-btn" aria-label="Favorite" (click)="add(item.id)">
                 <ion-icon class="icon left" name="add" aria-hidden="true"></ion-icon>
               </button>
             </div>
             <div class="remove">
-              <button class="remove-btn" aria-label="Favorite">
+              <button class="remove-btn" aria-label="Favorite" (click)="remove(item.id)">
                 <ion-icon style="font-size: 35px; color: red;" name="close-circle"></ion-icon>
               </button>
             </div>
           </div>
           <div class="price-div">
-            <ion-card-subtitle>Rs.760</ion-card-subtitle>
+            <ion-card-subtitle>LKR {{item.product_total}}</ion-card-subtitle>
           </div>
         </div>
       </ion-card>
-
-      <ion-card>
-        <div class="upper">
-          <div class="h3-div">
-            <h3 class="h3">Chicken and Cheese Pizza Pasta Cream </h3>
-          </div>
-          <div class="image-div">
-            <img src="./../../assets/waffle.jpg" alt="Item Picture">
-          </div>
-        </div>
-        <div class="lower">
-          <div class="lower-inner">
-            <div class="quantity">
-              <button class="update-btn" aria-label="Favorite">
-                <ion-icon  class="icon right" name="remove" aria-hidden="true"></ion-icon>
-              </button>
-              {{1}}
-              <button class="update-btn" aria-label="Favorite">
-                <ion-icon class="icon left" name="add" aria-hidden="true"></ion-icon>
-              </button>
-            </div>
-            <div class="remove">
-              <button class="remove-btn" aria-label="Favorite">
-                <ion-icon style="font-size: 35px; color: red;" name="close-circle"></ion-icon>
-              </button>
-            </div>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>Rs.760</ion-card-subtitle>
-          </div>
-        </div>
-      </ion-card>
-
-      <ion-card>
-        <div class="upper">
-          <div class="h3-div">
-            <h3 class="h3">Chicken and Cheese Pizza Pasta Cream </h3>
-          </div>
-          <div class="image-div">
-            <img src="./../../assets/burger.jpg" alt="Item Picture">
-          </div>
-        </div>
-        <div class="lower">
-          <div class="lower-inner">
-            <div class="quantity">
-              <button class="update-btn" aria-label="Favorite">
-                <ion-icon  class="icon right" name="remove" aria-hidden="true"></ion-icon>
-              </button>
-              {{1}}
-              <button class="update-btn" aria-label="Favorite">
-                <ion-icon class="icon left" name="add" aria-hidden="true"></ion-icon>
-              </button>
-            </div>
-            <div class="remove">
-              <button class="remove-btn" aria-label="Favorite">
-                <ion-icon style="font-size: 35px; color: red;" name="close-circle"></ion-icon>
-              </button>
-            </div>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>Rs.760</ion-card-subtitle>
-          </div>
-        </div>
-      </ion-card>
-
-
 
       <div class="sub-container">
         <div class="sub-total">
           Subtotal
         </div>
         <div class="price">
-          RS.2280
+          LKR {{itemForm.sub_total}}
         </div>
       </div>
 
-      <button class="checkout-btn">Checkout</button>
+      <button *ngIf="!changed" class="checkout-btn" (click)="checkout()">Checkout</button>
+      <button *ngIf="changed" class="checkout-btn" (click)="update()">Update Cart</button>
     </div>
   </div>
 </ion-content>
 
 
-<div class="tabs-div">
-  <ion-tab-bar class="tabs" slot="bottom">
-    <ion-tab-button routerLink="/home" class="link" tab="home">
-      <ion-icon class="image-color" name="home"></ion-icon>
-        <a class="a">Home</a>
-      </ion-tab-button>
-      <ion-tab-button class="image-color" tab="radio">
-        <ion-icon name="search"></ion-icon>
-        <a class="a">Browse</a>
-      </ion-tab-button>
-      <ion-tab-button class="image-color" tab="library">
-        <ion-icon name="library"></ion-icon>
-        <a class="a">Orders</a>
-      </ion-tab-button>
-      <ion-tab-button class="image-color" tab="search">
-        <ion-icon name="cart"></ion-icon>
-        <a class="a">Cart</a>
-      </ion-tab-button>
-      <ion-tab-button routerLink="/loading" class="image-color" tab="search">
-        <ion-icon name="reorder-four"></ion-icon>
-        <a class="a">More</a>
-      </ion-tab-button>
-    </ion-tab-bar>
-</div>>
+<app-tab-bar></app-tab-bar>
 

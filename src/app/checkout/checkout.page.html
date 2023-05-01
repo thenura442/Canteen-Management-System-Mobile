@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <ion-title>Checkout</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <h1 class="h1" style="margin-bottom: 5%;">{{ vendorForm.vendor_name }}</h1>
+
+    <h1 style="margin-left: 3%; margin-right: 3%; margin-bottom: 10%;"><img style="width: 100px;" [src]="vendorForm.url"></h1>
+
+    <div class="item-container">
+      <ion-card *ngFor="let item of orderForm.products">
+        <div class="upper">
+          <div class="h3-div">
+            <h3 class="h3">{{item.item_name}}</h3>
+          </div>
+          <div class="h3-div" style="text-align: right;">
+            <h3 class="h3">x {{item.quantity}}</h3>
+          </div>
+          <div class="price-div">
+            <ion-card-subtitle>LKR {{item.price}}</ion-card-subtitle>
+          </div>
+        </div>
+      </ion-card>
+
+      <!-- <div class="sub-container">
+        <div class="sub-total">
+          Subtotal
+        </div>
+        <div class="price">
+          {{itemForm.sub_total}}
+        </div>
+      </div> -->
+
+      <!-- <button *ngIf="!changed" class="checkout-btn" (click)="checkout()">Checkout</button>
+      <button *ngIf="changed" class="checkout-btn" (click)="update()">Update Cart</button>-->
+
+      <div class="detail-container">
+        <div class="sub-container">
+          <div class="sub-total">
+            Sub Total
+          </div>
+          <div class="price">
+            {{orderForm.sub_total}}
+          </div>
+        </div>
+        <div class="sub-container">
+          <div class="sub-total">
+            Discount
+          </div>
+          <div class="price">
+            {{0}}
+          </div>
+        </div>
+        <div class="sub-container">
+          <div class="sub-total">
+            Total
+          </div>
+          <div class="price">
+            {{orderForm.total}}
+          </div>
+        </div>
+      </div>
+
+      <button class="checkout-btn" style="margin-top: 50px;" (click)="confirm()">Confirm</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,5 +1,5 @@
-<ion-header style="position: absolute;">
-  <ion-toolbar>
+<ion-header style="position: absolute;" class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,30 +7,141 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-img [src]="stores.url" alt="Store Picture"></ion-img>
+  <ion-img [src]="stores.url"></ion-img>
 
   <div class="container">
     <h1 class="h1">{{stores.vendor_name}}</h1>
 
+    <!-- Special Items -->
+    <div *ngIf="snack.length">
+      <h3 class="h1">Special</h3>
 
-    <div>
-      <h1 class="h1">{{stores.vendor_name}}</h1>
-
-      <ion-card *ngFor="let item of items" [routerLink]="['/item', item.id]">
+      <ion-card *ngFor="let special of specialItems" [routerLink]="['/item', special.id]">
         <div class="ion-card">
           <div class="content">
             <ion-card-header>
-              <ion-card-title>{{item.item_name}}</ion-card-title>
-              <ion-card-subtitle>{{item.price}}</ion-card-subtitle>
+              <ion-card-title>{{special.item_name}}</ion-card-title>
+              <ion-card-subtitle>LKR {{special.price}}</ion-card-subtitle>
             </ion-card-header>
-            <ion-card-content>
-              {{item.description}}
-            </ion-card-content>
           </div>
           <div class="image-div">
-            <img class="image" alt="Food Item Picture" [src]="item.url" />
+            <img class="image" alt="Food Item Picture" [src]="special.url" />
           </div>
         </div>
+        <ion-card-content>
+          {{special.description}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+
+    <!-- Snacks -->
+    <div *ngIf="snack.length">
+      <h3 class="h1">Snack</h3>
+
+      <ion-card *ngFor="let snack of snack" [routerLink]="['/item', snack.id]">
+        <div class="ion-card">
+          <div class="content">
+            <ion-card-header>
+              <ion-card-title>{{snack.item_name}}</ion-card-title>
+              <ion-card-subtitle>LKR {{snack.price}}</ion-card-subtitle>
+            </ion-card-header>
+          </div>
+          <div class="image-div">
+            <img class="image" alt="Food Item Picture" [src]="snack.url" />
+          </div>
+        </div>
+        <ion-card-content>
+          {{snack.description}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Starters -->
+    <div *ngIf="starter.length">
+      <h3  class="h1">Starter</h3>
+
+      <ion-card *ngFor="let starter of starter" [routerLink]="['/item', starter.id]">
+        <div class="ion-card">
+          <div class="content">
+            <ion-card-header>
+              <ion-card-title>{{starter.item_name}}</ion-card-title>
+              <ion-card-subtitle>LKR {{starter.price}}</ion-card-subtitle>
+            </ion-card-header>
+          </div>
+          <div class="image-div">
+            <img class="image" alt="Food Item Picture" [src]="starter.url" />
+          </div>
+        </div>
+        <ion-card-content>
+          {{starter.description}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Main -->
+    <div *ngIf="main.length">
+      <h3 class="h1">Main</h3>
+
+      <ion-card *ngFor="let main of main" [routerLink]="['/item', main.id]">
+        <div class="ion-card">
+          <div class="content">
+            <ion-card-header>
+              <ion-card-title>{{main.item_name}}</ion-card-title>
+              <ion-card-subtitle>LKR {{main.price}}</ion-card-subtitle>
+            </ion-card-header>
+          </div>
+          <div class="image-div">
+            <img class="image" alt="Food Item Picture" [src]="main.url" />
+          </div>
+        </div>
+        <ion-card-content>
+          {{main.description}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Desserts -->
+    <div *ngIf="dessert.length">
+      <h3 class="h1">Desserts</h3>
+
+      <ion-card *ngFor="let dessert of dessert" [routerLink]="['/item', dessert.id]">
+        <div class="ion-card">
+          <div class="content">
+            <ion-card-header>
+              <ion-card-title>{{dessert.item_name}}</ion-card-title>
+              <ion-card-subtitle>LKR {{dessert.price}}</ion-card-subtitle>
+            </ion-card-header>
+          </div>
+          <div class="image-div">
+            <img class="image" alt="Food Item Picture" [src]="dessert.url" />
+          </div>
+        </div>
+        <ion-card-content>
+          {{dessert.description}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Beverages -->
+    <div *ngIf="beverage.length">
+      <h3 class="h1">Beverages</h3>
+
+      <ion-card *ngFor="let beverage of beverage" [routerLink]="['/item', beverage.id]">
+        <div class="ion-card">
+          <div class="content">
+            <ion-card-header>
+              <ion-card-title>{{beverage.item_name}}</ion-card-title>
+              <ion-card-subtitle>LKR {{beverage.price}}</ion-card-subtitle>
+            </ion-card-header>
+          </div>
+          <div class="image-div">
+            <img class="image" alt="Food Item Picture" [src]="beverage.url" />
+          </div>
+        </div>
+        <ion-card-content>
+          {{beverage.description}}
+        </ion-card-content>
       </ion-card>
     </div>
   </div>

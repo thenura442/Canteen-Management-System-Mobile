@@ -4,12 +4,12 @@
 
     <div class="form-container">
       <form>
-        <input class="form-input" type="text"placeholder="Enter Email">
+        <input class="form-input" type="text" required placeholder="Enter Email" name="email" [(ngModel)]="loginForm.email">
 
-        <input class="form-input" type="password" placeholder="Enter Password">
+        <input class="form-input" type="password" required placeholder="Enter Password" name="password" [(ngModel)]="loginForm.password">
 
         <div class="buttons-div">
-          <button routerLink="/home" class="form-button">LOGIN</button>
+          <button class="form-button" (click)="login()">LOGIN</button>
         </div>
       </form>
     </div>

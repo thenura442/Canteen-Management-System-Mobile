@@ -1,4 +1,4 @@
-.ion-toolbar {
+ion-toolbar {
   --background: transparent;
   --ion-color-base: transparent !important;
 }
@@ -8,9 +8,21 @@ ion-buttons {
   background-color: white !important;
   border: 1px solid white !important;
   border-radius: 50px;
-  padding: 2px;
-  height: fit-content;
-  width: fit-content;
+  padding: 0px 5px;
+}
+
+ion-card {
+  width: 94%;
+}
+
+.add-to-cart {
+  --background: #3CB371;
+  --ion-color-base: transparent !important;
+}
+
+.view-cart {
+  --background: black;
+  --ion-color-base: transparent !important;
 }
 
 
@@ -43,27 +55,26 @@ ion-card-content {
   margin-bottom: 5%;
 }
 
-ion-toolbar {
-  --background: #3CB371;
-  --ion-color-base: transparent !important;
-}
-
 .add {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.btn {
+.btn-add {
   font-size: 20px;
   background-color: #3CB371;
+}
+
+.btn-view {
+  font-size: 20px;
+  background-color: black;
 }
 
 // ADD MINUS BUTTON
 
 .outer-div {
   width: 40%;
-  max-width: 200px;
   height: 50px;
   border: 1px solid #eeeeee;
   border-radius: 25px;
@@ -91,4 +102,10 @@ ion-toolbar {
 .icon {
   font-size: 25px;
   color: black;
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
 }

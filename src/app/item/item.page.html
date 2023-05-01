@@ -1,5 +1,5 @@
-<ion-header style="position: absolute;">
-  <ion-toolbar class="ion-toolbar">
+<ion-header style="position: absolute;" class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -8,41 +8,51 @@
 
 
 <ion-content [fullscreen]="true">
-  <ion-img src="./../../assets/waffle.jpg" alt="Store Picture"></ion-img>
+  <ion-img [src]="item.url" alt="Store Picture"></ion-img>
 
   <div class="container">
 
-    <ion-card>
+    <ion-card >
       <div class="content" routerLink="/item">
         <ion-card-header>
-          <ion-card-title>Cheese And Chicken Burger</ion-card-title>
-          <ion-card-subtitle>Rs.760</ion-card-subtitle>
+          <ion-card-title>{{item.item_name}}</ion-card-title>
+          <ion-card-subtitle>LKR {{item.price}}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          A Burger filled with cream cheese and a chicken patty made up of several ingredients.
+          {{item.description}}
         </ion-card-content>
       </div>
     </ion-card>
+
     <div class="outer-div">
-      <button class="update-btn" aria-label="Favorite">
+      <button class="update-btn" aria-label="Favorite" (click)="minus()" [ngClass]="itemForm.products[0].quantity !== '1' ? 'update-btn' : 'disabled'">
         <ion-icon  class="icon right" name="remove" aria-hidden="true"></ion-icon>
       </button>
-      {{1}}
-      <button class="update-btn" aria-label="Favorite">
+      {{this.itemForm.products[0].quantity}}
+      <button class="update-btn" aria-label="Favorite" (click)="add()">
         <ion-icon class="icon left" name="add" aria-hidden="true"></ion-icon>
       </button>
     </div>
 
     <div>
-      <h3>LKR 1,530</h3>
+      <h3>LKR {{itemForm.products[0].product_total}}</h3>
+    </div>
+
+    <div *ngIf="!sameCart">
+      <h3 style="background-color: rgb(137, 168, 137); padding: 10px;">Cart with Another Vendor is ongoing!</h3>
     </div>
   </div>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <div class="add">
-      <button class="btn">Add to Cart</button>
+  <ion-toolbar class="add-to-cart" *ngIf="!added && sameCart">
+    <div class="add" (click)="AddToCart()">
+      <button class="btn-add">Add to Cart</button>
+    </div>
+  </ion-toolbar>
+  <ion-toolbar class="view-cart" *ngIf="added || !sameCart">
+    <div class="add" routerLink="/cart">
+      <button class="btn-view ">View Cart</button>
     </div>
   </ion-toolbar>
 </ion-footer>

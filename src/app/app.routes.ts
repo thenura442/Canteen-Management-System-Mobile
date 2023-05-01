@@ -23,11 +23,6 @@ export const routes: Routes = [
     loadComponent: () => import('./store/store.page').then( m => m.StorePage)
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
     path: 'item/:id',
     loadComponent: () => import('./item/item.page').then( m => m.ItemPage)
   },
@@ -35,5 +30,15 @@ export const routes: Routes = [
     path: 'cart',
     loadComponent: () => import('./cart/cart.page').then( m => m.CartPage)
   },
+  {
+    path: 'checkout',
+    loadComponent: () => import('./checkout/checkout.page').then( m => m.CheckoutPage)
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+
 
 ];
