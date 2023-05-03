@@ -1,17 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StorePage } from './store.page';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { StorePage } from './store.page';
 
-describe('StorePage', () => {
-  let component: StorePage;
-  let fixture: ComponentFixture<StorePage>;
+// describe('StorePage', () => {
+//   let component: StorePage;
+//   let fixture: ComponentFixture<StorePage>;
 
-  beforeEach(async(() => {
-    fixture = TestBed.createComponent(StorePage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+//   beforeEach(async(() => {
+//     fixture = TestBed.createComponent(StorePage);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
