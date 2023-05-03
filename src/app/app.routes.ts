@@ -35,10 +35,19 @@ export const routes: Routes = [
     loadComponent: () => import('./checkout/checkout.page').then( m => m.CheckoutPage)
   },
   {
+    path: 'orders',
+    loadComponent: () => import('./orders/orders.page').then( m => m.OrdersPage)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'orders',
+    loadComponent: () => import('./orders/orders.page').then( m => m.OrdersPage)
+  },
+
 
 
 ];
