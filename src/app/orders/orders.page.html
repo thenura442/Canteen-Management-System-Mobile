@@ -11,69 +11,41 @@
     <h1 class="h1" style="margin-bottom: 5%;">{{ "Ongoing" }}</h1>
 
     <div class="item-container">
-      <ion-card>
+      <ion-card *ngFor="let order of ongoingOrders">
         <div class="upper">
           <div style="width: 70%; text-align: left;">
-            <h3 class="heading">Street Food Store</h3>
+            <h3 class="heading">{{order.store_name}}</h3>
           </div>
           <div style="width: 30%; text-align: right;">
-            <h5 class="header-other">02: 18 PM</h5>
+            <h5 class="header-other">{{order.time}}</h5>
           </div>
         </div>
         <div class="upper">
           <div style="width: 50%; text-align: left;">
-            <h3 class="header-other">#202302011</h3>
+            <h3 class="header-other">{{order.id}}</h3>
           </div>
           <div style="width: 50%; text-align: right;">
-            <h5 class="header-other">2023/03/25</h5>
+            <h5 class="header-other">{{order.date}}</h5>
           </div>
         </div>
         <div class="status-div">
-          <h5 class="status">Pending Approval</h5>
+          <h5 class="status">{{order.status | titlecase}}</h5>
         </div>
         <div class="upper-image">
-          <img style="width: 100%; height: auto;" src="https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/street-store--1682063656260.jpeg">
+          <img style="width: 100%; height: auto;" [src]="order.store_url">
         </div>
-        <div class="item-list">
+        <div class="item-list" *ngFor="let item of order.products">
           <div class="quantity-div">
-            <h3 class="h3">{{"1"}}</h3>
+            <h3 class="h3">{{item.quantity}}</h3>
           </div>
           <div class="quantity-div">
             <h3 class="h3">{{"X"}}</h3>
           </div>
           <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Honey Waffle"}}</h3>
+            <h3 class="h3">{{item.item_name}}</h3>
           </div>
           <div class="price-div">
-            <ion-card-subtitle>LKR {{"400"}}</ion-card-subtitle>
-          </div>
-        </div>
-        <div class="item-list">
-          <div class="quantity-div">
-            <h3 class="h3">{{"2"}}</h3>
-          </div>
-          <div class="quantity-div">
-            <h3 class="h3">{{"X"}}</h3>
-          </div>
-          <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Cream Waffle"}}</h3>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>LKR {{"1000"}}</ion-card-subtitle>
-          </div>
-        </div>
-        <div class="item-list">
-          <div class="quantity-div">
-            <h3 class="h3">{{"1"}}</h3>
-          </div>
-          <div class="quantity-div">
-            <h3 class="h3">{{"X"}}</h3>
-          </div>
-          <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Ice Cream"}}</h3>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>LKR {{"200"}}</ion-card-subtitle>
+            <ion-card-subtitle>LKR {{item.product_total}}</ion-card-subtitle>
           </div>
         </div>
         <div class="item-list" style="border: none;" >
@@ -81,7 +53,7 @@
             <h3 class="heading" style="font-size: 18px;">Total</h3>
           </div>
           <div style="width: 50%; text-align: left;">
-            <h5 class="heading" style="font-size: 18px;">LKR 1600</h5>
+            <h5 class="heading" style="font-size: 18px;">{{order.total}}</h5>
           </div>
         </div>
         <div class="item-list" style="border: none; margin: 0;" >
@@ -89,96 +61,10 @@
             <h3 class="heading" style="font-size: 18px;">Payment</h3>
           </div>
           <div style="width: 50%; text-align: left;">
-            <h5 class="heading" style="font-size: 18px;">Cash</h5>
+            <h5 class="heading" style="font-size: 18px;">{{order.payment_type}}</h5>
           </div>
         </div>
-        <div class="buttons-div" >
-          <button class="cancel">Cancel</button>
-        </div>
-      </ion-card>
-
-      <ion-card>
-        <div class="upper">
-          <div style="width: 70%; text-align: left;">
-            <h3 class="heading">Street Food Store</h3>
-          </div>
-          <div style="width: 30%; text-align: right;">
-            <h5 class="header-other">02: 18 PM</h5>
-          </div>
-        </div>
-        <div class="upper">
-          <div style="width: 50%; text-align: left;">
-            <h3 class="header-other">#202302011</h3>
-          </div>
-          <div style="width: 50%; text-align: right;">
-            <h5 class="header-other">2023/03/25</h5>
-          </div>
-        </div>
-        <div class="status-div">
-          <h5 class="status">Pending Approval</h5>
-        </div>
-        <div class="upper-image">
-          <img style="width: 100%; height: auto;" src="https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/street-store--1682063656260.jpeg">
-        </div>
-        <div class="item-list">
-          <div class="quantity-div">
-            <h3 class="h3">{{"1"}}</h3>
-          </div>
-          <div class="quantity-div">
-            <h3 class="h3">{{"X"}}</h3>
-          </div>
-          <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Honey Waffle"}}</h3>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>LKR {{"400"}}</ion-card-subtitle>
-          </div>
-        </div>
-        <div class="item-list">
-          <div class="quantity-div">
-            <h3 class="h3">{{"2"}}</h3>
-          </div>
-          <div class="quantity-div">
-            <h3 class="h3">{{"X"}}</h3>
-          </div>
-          <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Cream Waffle"}}</h3>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>LKR {{"1000"}}</ion-card-subtitle>
-          </div>
-        </div>
-        <div class="item-list">
-          <div class="quantity-div">
-            <h3 class="h3">{{"1"}}</h3>
-          </div>
-          <div class="quantity-div">
-            <h3 class="h3">{{"X"}}</h3>
-          </div>
-          <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Ice Cream"}}</h3>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>LKR {{"200"}}</ion-card-subtitle>
-          </div>
-        </div>
-        <div class="item-list" style="border: none;" >
-          <div style="width: 50%; text-align: left;">
-            <h3 class="heading" style="font-size: 18px;">Total</h3>
-          </div>
-          <div style="width: 50%; text-align: left;">
-            <h5 class="heading" style="font-size: 18px;">LKR 1600</h5>
-          </div>
-        </div>
-        <div class="item-list" style="border: none; margin: 0;" >
-          <div style="width: 50%; text-align: left;">
-            <h3 class="heading" style="font-size: 18px;">Payment</h3>
-          </div>
-          <div style="width: 50%; text-align: left;">
-            <h5 class="heading" style="font-size: 18px;">Cash</h5>
-          </div>
-        </div>
-        <div class="buttons-div" >
+        <div class="buttons-div" *ngIf="order.status === 'pending'">
           <button class="cancel">Cancel</button>
         </div>
       </ion-card>
@@ -188,70 +74,42 @@
 
     <h1 class="h1" style="margin-bottom: 5%;">{{ "Completed" }}</h1>
 
-    <div class="item-container">
+    <div class="item-container" *ngFor="let order of completedOrders">
       <ion-card>
         <div class="upper">
           <div style="width: 70%; text-align: left;">
-            <h3 class="heading">Street Food Store</h3>
+            <h3 class="heading">{{order.store_name}}</h3>
           </div>
           <div style="width: 30%; text-align: right;">
-            <h5 class="header-other">02: 18 PM</h5>
+            <h5 class="header-other">{{order.time}}</h5>
           </div>
         </div>
         <div class="upper">
           <div style="width: 50%; text-align: left;">
-            <h3 class="header-other">#202302011</h3>
+            <h3 class="header-other">{{order.id}}</h3>
           </div>
           <div style="width: 50%; text-align: right;">
-            <h5 class="header-other">2023/03/25</h5>
+            <h5 class="header-other">{{order.date}}</h5>
           </div>
         </div>
         <div class="status-div">
-          <h5 class="status">Pending Approval</h5>
+          <h5 class="status">{{order.status | titlecase}}</h5>
         </div>
         <div class="upper-image">
-          <img style="width: 100%; height: auto;" src="https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/street-store--1682063656260.jpeg">
+          <img style="width: 100%; height: auto;" [src]="order.store_url">
         </div>
-        <div class="item-list">
+        <div class="item-list" *ngFor="let item of order.products">
           <div class="quantity-div">
-            <h3 class="h3">{{"1"}}</h3>
+            <h3 class="h3">{{item.quantity}}</h3>
           </div>
           <div class="quantity-div">
             <h3 class="h3">{{"X"}}</h3>
           </div>
           <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Honey Waffle"}}</h3>
+            <h3 class="h3">{{item.item_name}}</h3>
           </div>
           <div class="price-div">
-            <ion-card-subtitle>LKR {{"400"}}</ion-card-subtitle>
-          </div>
-        </div>
-        <div class="item-list">
-          <div class="quantity-div">
-            <h3 class="h3">{{"2"}}</h3>
-          </div>
-          <div class="quantity-div">
-            <h3 class="h3">{{"X"}}</h3>
-          </div>
-          <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Cream Waffle"}}</h3>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>LKR {{"1000"}}</ion-card-subtitle>
-          </div>
-        </div>
-        <div class="item-list">
-          <div class="quantity-div">
-            <h3 class="h3">{{"1"}}</h3>
-          </div>
-          <div class="quantity-div">
-            <h3 class="h3">{{"X"}}</h3>
-          </div>
-          <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">{{"Ice Cream"}}</h3>
-          </div>
-          <div class="price-div">
-            <ion-card-subtitle>LKR {{"200"}}</ion-card-subtitle>
+            <ion-card-subtitle>LKR {{item.product_total}}</ion-card-subtitle>
           </div>
         </div>
         <div class="item-list" style="border: none;" >
@@ -259,7 +117,7 @@
             <h3 class="heading" style="font-size: 18px;">Total</h3>
           </div>
           <div style="width: 50%; text-align: left;">
-            <h5 class="heading" style="font-size: 18px;">LKR 1600</h5>
+            <h5 class="heading" style="font-size: 18px;">{{order.total}}</h5>
           </div>
         </div>
         <div class="item-list" style="border: none; margin: 0;" >
@@ -267,10 +125,10 @@
             <h3 class="heading" style="font-size: 18px;">Payment</h3>
           </div>
           <div style="width: 50%; text-align: left;">
-            <h5 class="heading" style="font-size: 18px;">Cash</h5>
+            <h5 class="heading" style="font-size: 18px;">{{order.payment_type}}</h5>
           </div>
         </div>
-        <div class="buttons-div" >
+        <div class="buttons-div" *ngIf="order.status === 'pending'">
           <button class="cancel">Cancel</button>
         </div>
       </ion-card>

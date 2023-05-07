@@ -1,0 +1,40 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="profile-div">
+      <div class="inner-profile-div">
+        <img class="profile-img" src="./../../assets/profile pic.jpg">
+        <!-- *ngIf="user.url == 'https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/profile+pic.jpg'" -->
+        <!-- <img class="profile-img" [src]="user.url" *ngIf="user.url != 'https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/profile+pic.jpg' "> -->
+      </div>
+    </div>
+
+    <div class="portion">
+      <h1 class="sub-header">Dinil Jayathilake</h1>
+      <label for="file_input_id" class="edit-link" routerLink="/profile">Profile Details</label>
+      <!-- <input type="file" id="file_input_id" (change)="selectImage($event)"> -->
+    </div>
+
+    <ion-list class="ion-list">
+      <div class="ion-list-div">
+        <img class="img" src="./../../assets/about.svg"/>
+      </div>
+      <ion-item  class="ion-item">
+        <ion-label class="ion-label">About</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="ion-list">
+      <div class="ion-list-div">
+        <img class="img" src="./../../assets/help.svg"/>
+      </div>
+      <ion-item  class="ion-item">
+        <ion-label class="ion-label">Help</ion-label>
+      </ion-item>
+    </ion-list>
+    <div class="logout-div">
+      <button class="logout">Logout</button>
+    </div>
+  </div>
+</ion-content>
+
+<app-tab-bar></app-tab-bar>

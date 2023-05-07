@@ -19,4 +19,12 @@ export class VendorService {
     return this.http.post(URL+PATH+'get/id/access',email);
   }
 
+  getAllVendors():any{
+    return this.http.get(URL+PATH+'get');
+  }
+
+
+  getVendorDetail(email: any):any{
+    return this.http.post(URL+PATH+'get/id',email);
+  }
 }

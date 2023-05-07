@@ -1,0 +1,107 @@
+.container {
+  margin: 2%;
+  margin-bottom: 100px;
+}
+
+.portion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20%;
+}
+
+.sub-header {
+  height: fit-content ;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+// List Styles
+
+.ion-list {
+  margin: 0px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ion-list-div {
+  height: fit-content;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ion-item {
+  width: 100%;
+}
+
+.ion-label {
+  padding: 5px 5px 5px 5px ;
+}
+
+.img {
+  width: 40px;
+}
+
+// Logout Button
+
+.logout-div {
+  padding-top: 100px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.logout {
+  border: 2px solid #EB445A;
+  border-radius: 5px;
+  height: 50px;
+  width: 50%;
+  background-color: white;
+  color: #EB445A;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 210%;
+  letter-spacing: 0.78px;
+}
+
+/*  PROFILE PIC */
+
+.profile-div {
+  height: fit-content;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+.inner-profile-div {
+  height: 180px;
+  width: 180px;
+}
+
+.profile-img {
+  height: 100%;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 100px;
+}
+
+.edit-link {
+  text-align: center;
+  height: fit-content;
+  color: #0038FF;
+  cursor: pointer;
+}
+
+#file_input_id{
+  display:none;
+}

@@ -7,10 +7,21 @@
 /* LOOGO */
 
 .logo-container {
-  display: flex;
-  height: 10%;
+  display:flex;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  height: fit-content;
   justify-content: center;
   align-items: center;
+  z-index: 100;
+  padding-top:4%;
+  margin-bottom: 6%;
+}
+
+ion-searchbar {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* H1 Styles */

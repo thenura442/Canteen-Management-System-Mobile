@@ -14,4 +14,8 @@ export class OrderService {
   createOrder(order : any):any{
     return this.http.post(URL+PATH+'create',order);
   }
+
+  getOrders(user : any) {
+    return this.http.post(URL+PATH+'get/user/orders',user);
+  }
 }

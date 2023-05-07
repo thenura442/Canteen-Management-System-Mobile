@@ -1,63 +1,36 @@
 <ion-content [fullscreen]="true">
 
   <div class="logo-container">
-    <ion-searchbar color="light" placeholder="Search Food or Drinks"></ion-searchbar>
+    <form (ngSubmit)="display()" style="width: 100%;">
+      <ion-searchbar color="light" placeholder="Search Food or Drinks" debounce="500" (ionInput)="search()" name="search" [(ngModel)] = "searchText"></ion-searchbar>
+    </form>
   </div>
 
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
+  <div class="container" >
 
-  <div class="container">
-    <ion-card class="card">
-      <img class="card-image" alt="Silhouette of mountains" src="./../../assets/burger.jpg" />
-      <ion-card-header>
-        <ion-card-title>Street Food Store</ion-card-title>
-        <ion-card-subtitle>Chicken Burger </ion-card-subtitle>
-      </ion-card-header>
+    <ion-list *ngIf="isSearch">
+      <ion-item *ngFor="let item of Items" style="display: flex; flex-direction: row; height: fit-content; cursor: pointer;" [routerLink]="['/item', item.id]">
+        <img style="width: 50px;" [src]="item.url" />
+        <ion-label style="padding: 10px 10px 10px 50px ;">{{ item.item_name }}</ion-label>
+      </ion-item>
+    </ion-list>
 
-      <ion-card-content>
-        Here's a small text description for the card content. Nothing more, nothing less.
-      </ion-card-content>
-    </ion-card>
+    <div *ngIf="searchText === '' && onEnter === false" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; height: 80vh;">
+      Search Items
+    </div>
 
-    <ion-card class="card">
-      <img class="card-image" alt="Silhouette of mountains" src="./../../assets/waffle.jpg" />
-      <ion-card-header>
-        <ion-card-title>Street Food Store</ion-card-title>
-        <ion-card-subtitle>Chicken Burger </ion-card-subtitle>
-      </ion-card-header>
+    <div *ngIf="onEnter && displayItems !== [] " style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <ion-card class="card" *ngFor="let product of displayItems" [routerLink]="['/item', product.id]">
+        <img class="card-image" [src]="product.url" />
+        <ion-card-header>
+          <ion-card-title>{{product.item_name}}</ion-card-title>
+        </ion-card-header>
 
-      <ion-card-content>
-        Here's a small text description for the card content. Nothing more, nothing less.
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card class="card">
-      <img class="card-image" alt="Silhouette of mountains" src="./../../assets/street store.jpg" />
-      <ion-card-header>
-        <ion-card-title>Street Food Store</ion-card-title>
-        <ion-card-subtitle>Chicken Burger </ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        Here's a small text description for the card content. Nothing more, nothing less.
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card style="margin-bottom: 20%;">
-      <img class="card-image" alt="Silhouette of mountains" src="./../../assets/indian store.jpg" />
-      <ion-card-header>
-        <ion-card-title>Street Food Store</ion-card-title>
-        <ion-card-subtitle>Chicken Burger </ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        Here's a small text description for the card content. Nothing more, nothing less.
-      </ion-card-content>
-    </ion-card>
+        <ion-card-content>
+          Here's a small text description for the card content. Nothing more, nothing less.
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 
 </ion-content>

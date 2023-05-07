@@ -1,0 +1,130 @@
+.container {
+  margin: 2%;
+  margin-bottom: 50px;
+}
+
+.portion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 10%;
+}
+
+.sub-header {
+  height: fit-content ;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+/*  PROFILE PIC */
+
+.profile-div {
+  height: fit-content;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+.inner-profile-div {
+  height: 180px;
+  width: 180px;
+}
+
+.profile-img {
+  height: 100%;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 100px;
+}
+
+.edit-link {
+  text-align: center;
+  height: fit-content;
+  color: #0038FF;
+  cursor: pointer;
+}
+
+#file_input_id{
+  display:none;
+}
+
+
+// Form Elements
+
+.form-header {
+  height: fit-content ;
+  text-align: left;
+  margin-bottom: 45px;
+  margin-top: 10px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 12% ;
+}
+
+.form-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 18px;
+  width: 40%;
+}
+
+.form-input {
+  height: 40px;
+  font-size: 16px;
+  padding: 5px 5px 5px 20px;
+  border: 1px solid #DDE2E8;
+  background-color: white;
+  border-radius: 5px;
+  width: 60%;
+}
+
+
+/* FORM BUTTONS */
+
+.buttons-div {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.form-button {
+  width: 15%;
+  height: 40px;
+  padding: 0px 10px;
+  background-color: #3CB371;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.84px;
+  color: #FFFFFF;
+  min-width: 140px;
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.red {
+  background-color: #ee6a6f;
+}
+

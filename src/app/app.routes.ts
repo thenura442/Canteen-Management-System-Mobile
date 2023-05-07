@@ -39,15 +39,29 @@ export const routes: Routes = [
     loadComponent: () => import('./orders/orders.page').then( m => m.OrdersPage)
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
+    path: 'order-confirmed',
+    loadComponent: () => import('./order-confirmed/order-confirmed.page').then( m => m.OrderConfirmedPage)
+  },
+  {
+    path: 'more',
+    loadComponent: () => import('./more/more.page').then( m => m.MorePage)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./profile/profile.page').then( m => m.ProfilePage)
   },
   {
     path: 'orders',
     loadComponent: () => import('./orders/orders.page').then( m => m.OrdersPage)
   },
-
-
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'password',
+    loadComponent: () => import('./change-password/change-password.page').then( m => m.ChangePasswordPage)
+  },
 
 ];

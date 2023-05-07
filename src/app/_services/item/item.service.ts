@@ -16,6 +16,10 @@ export class ItemService {
     return this.http.post(URL+PATH+'get',vendor);
   }
 
+  searchItemList(search : any):any{
+    return this.http.post(URL+PATH+'get/search/list', search);
+  }
+
   getItem(id: any):any{
     return this.http.post(URL+PATH+'get/id/',id);
   }
