@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../_services/auth/auth.service';
 
 @Component({
   selector: 'app-more',
   templateUrl: './more.page.html',
   styleUrls: ['./more.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent , RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent , RouterLink ]
 })
 export class MorePage implements OnInit {
 
-  constructor() { }
+  constructor(private authService : AuthService , private router: Router) { }
 
   image: any = [];
   path = "";
@@ -50,4 +51,10 @@ export class MorePage implements OnInit {
     }
   }
 
+  logout(){
+    this.authService.logOut().subscribe((logout: any) => {
+      console.log(logout);
+      this.router.navigateByUrl('/login');
+    })
+  }
 }

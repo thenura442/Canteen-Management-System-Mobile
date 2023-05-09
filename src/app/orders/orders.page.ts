@@ -32,6 +32,7 @@ export class OrdersPage implements OnInit {
     })
 
     this.orderService.getOrders({email : email}).subscribe((orders : any) =>{
+      console.log(orders)
       for(let i = 0; i < orders.length; i++){
         if(orders[i].status === 'completed' || orders[i].status === 'rejected' || orders[i].status === 'cancelled'){
           this.completedOrders.push(orders[i]);

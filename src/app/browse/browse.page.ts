@@ -30,6 +30,7 @@ export class BrowsePage {
       this.isSearch = true;
     }
     this.itemService.searchItemList({search : this.searchText}).subscribe((items : any) =>{
+      console.log(items)
       this.isSearch = true;
       this.Items = items;
     })

@@ -61,6 +61,5 @@ export class AuthService {
     localStorage.removeItem('currentData');
     this.dataSub.next(null);
     return this.http.get<any>(URL+PATH+'logout');
-
   }
 }
