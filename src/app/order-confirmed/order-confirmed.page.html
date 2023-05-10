@@ -1,13 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>order-confirmed</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <div class="confirmation">
+    <div class="ion-text-center">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">order-confirmed</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <div class="outer-circle">
+        <div class="inner-circle">
+          <img src="../../assets/like.png" />
+        </div>
+      </div>
+
+      <h2>Confirmation</h2>
+      <p>
+        You have successfully <br>
+        placed your Order!
+      </p>
+      <button class="back-btn" routerLink="/home" routerDirection="back">Back to Home</button>
+    </div>
+  </div>
 </ion-content>

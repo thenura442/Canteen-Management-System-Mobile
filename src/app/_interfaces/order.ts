@@ -1,6 +1,9 @@
 export interface Order {
   id: String,
   customer_email: String,
+  customer_name: String,
+  store_name: String,
+  store_url: String,
   store_email: String,
   sub_total: String,
   payment_type: String,

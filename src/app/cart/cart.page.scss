@@ -5,10 +5,21 @@
 
 
 .h1 {
-  margin-left: 3%;
-  margin-right: 3%;
+  margin-left: 4%;
   margin-top: 10%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
+  margin: 0;
+  font-size: 18px;
+  color: black;
+  font-weight: 500;
+}
+
+.h1-vendor {
+  margin-left: 3%;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .h2 {
@@ -39,11 +50,6 @@ ion-card {
   flex-direction: row;
   width: 100%;
   height: fit-content;
-}
-
-.h3 {
-  margin: 0;
-  font-size: 18px;
 }
 
 .h3-div {
@@ -150,12 +156,14 @@ ion-card-subtitle {
   width: 50%;
   text-align: center;
   font-size: 22px;
+  font-weight: 600;
 }
 
 .price {
   width: 50%;
   text-align: center;
   font-size: 21px;
+  font-weight: 600;
 }
 
 .checkout-btn {

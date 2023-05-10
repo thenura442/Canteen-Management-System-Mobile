@@ -9,6 +9,8 @@ import { VendorService } from '../_services/vendor/vendor.service';
 import { Order } from '../_interfaces/order';
 import { OrderService } from '../_services/order/order.service';
 import { AuthService } from '../_services/auth/auth.service';
+import { UserService } from '../_services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -22,11 +24,14 @@ import { AuthService } from '../_services/auth/auth.service';
 })
 export class CheckoutPage implements OnInit{
 
-  constructor(private authService: AuthService, private orderService : OrderService, private datePipe: DatePipe, private cartService: CartService, private vendorService: VendorService) {}
+  constructor(private router : Router ,private authService: AuthService, private orderService : OrderService, private datePipe: DatePipe, private cartService: CartService, private vendorService: VendorService , private userService : UserService) {}
 
   originalOrderForm: Order = {
     id: "",
     customer_email: "thenura114@gmail.com",
+    customer_name: "",
+    store_name: "",
+    store_url: "",
     store_email: "",
     sub_total: "",
     payment_type: "",
@@ -80,14 +85,23 @@ export class CheckoutPage implements OnInit{
 
       this.vendorService.getVendor({email : result.store_email}).subscribe((vendor:any) => {
         this.vendorForm = vendor;
+        this.orderForm.store_name = vendor.vendor_name;
+        this.orderForm.store_url = vendor.url;
+      })
+
+      this.userService.getUser({email: email}).subscribe((user : any) => {
+        this.orderForm.customer_name = user.first_name;
       })
 
     })
   }
 
   confirm(){
-    console.log(this.orderForm)
     this.orderService.createOrder(this.orderForm).subscribe((result:any) => {
+      if(result.id != null && result.id != undefined && result.id != "")
+      {
+        this.router.navigateByUrl('/order-confirmed');
+      }
       console.log(result);
     })
   }

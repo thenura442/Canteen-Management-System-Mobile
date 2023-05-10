@@ -9,18 +9,18 @@
 
 <ion-content [fullscreen]="true">
   <div class="container">
-    <h1 class="h1" style="margin-bottom: 5%;">{{ vendorForm.vendor_name }}</h1>
+    <h1 class="h1-vendor" style="margin-bottom: 5%;">{{ vendorForm.vendor_name }}</h1>
 
-    <h1 style="margin-left: 3%; margin-right: 3%; margin-bottom: 10%;"><img style="width: 100px;" [src]="vendorForm.url"></h1>
+    <h1 style="margin-left: 3%; margin-right: 3%; margin-bottom: 5%;"><img style="width: 100px;" [src]="vendorForm.url"></h1>
 
     <div class="item-container">
       <ion-card *ngFor="let item of orderForm.products">
         <div class="upper">
-          <div class="h3-div">
+          <div class="h3-div-item">
             <h3 class="h3">{{item.item_name}}</h3>
           </div>
-          <div class="h3-div" style="text-align: right;">
-            <h3 class="h3">x {{item.quantity}}</h3>
+          <div class="h3-div-quantity" style="text-align: right;">
+            <h3 class="h3-item">x {{item.quantity}}</h3>
           </div>
           <div class="price-div">
             <ion-card-subtitle>LKR {{item.price}}</ion-card-subtitle>
@@ -47,14 +47,6 @@
           </div>
           <div class="price">
             {{orderForm.sub_total}}
-          </div>
-        </div>
-        <div class="sub-container">
-          <div class="sub-total">
-            Discount
-          </div>
-          <div class="price">
-            {{0}}
           </div>
         </div>
         <div class="sub-container">

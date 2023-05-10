@@ -22,6 +22,7 @@ export class BrowsePage {
   }
 
   search() {
+    this.onEnter = false;
     if(this.searchText === ""){
       this.isSearch = false;
       return

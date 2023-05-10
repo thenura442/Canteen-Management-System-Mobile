@@ -26,10 +26,50 @@ ion-card{
 
 
 .h1 {
+  margin-left: 4%;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  font-weight: 600;
+}
+
+.h1-vendor {
   margin-left: 3%;
   margin-top: 10%;
   margin-bottom: 5%;
+  font-size: 28px;
+  font-weight: 700;
 }
+
+.description {
+  margin-left: 3%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-size: 17px;
+  font-weight: 500;
+  color: rgb(133, 133, 133);
+}
+
+// .title {
+//   font-size: 20px;
+//   font-weight: 500;
+//   color: black;
+//   margin: 0;
+// }
+
+// .subtitle {
+//   font-size: 14px;
+//   font-weight: 600;
+//   color: rgb(133, 133, 133);
+//   margin: 10px 0px 0px 0px;
+// }
+
+// .card-description {
+//   font-size: 14px;
+//   font-weight: 500;
+//   color: rgb(133, 133, 133);
+//   margin: 0px 0px 0px 0px;
+//   margin-left: 5%;
+// }
 
 .ion-card {
   display: flex;
@@ -48,4 +88,7 @@ ion-card{
 
 .image {
   height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

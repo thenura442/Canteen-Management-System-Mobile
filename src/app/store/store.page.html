@@ -10,10 +10,12 @@
   <ion-img [src]="stores.url"></ion-img>
 
   <div class="container">
-    <h1 class="h1">{{stores.vendor_name}}</h1>
+    <h1 class="h1-vendor">{{stores.vendor_name}}</h1>
+
+    <h3 class="description">{{stores.description}}</h3>
 
     <!-- Special Items -->
-    <div *ngIf="snack.length">
+    <div *ngIf="specialItems.length">
       <h3 class="h1">Special</h3>
 
       <ion-card *ngFor="let special of specialItems" [routerLink]="['/item', special.id]">
