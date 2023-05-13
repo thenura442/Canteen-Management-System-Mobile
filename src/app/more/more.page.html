@@ -2,14 +2,14 @@
   <div class="container">
     <div class="profile-div">
       <div class="inner-profile-div">
-        <img class="profile-img" src="./../../assets/profile pic.jpg">
+        <img class="profile-img" [src]="user.url">
         <!-- *ngIf="user.url == 'https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/profile+pic.jpg'" -->
         <!-- <img class="profile-img" [src]="user.url" *ngIf="user.url != 'https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/profile+pic.jpg' "> -->
       </div>
     </div>
 
     <div class="portion">
-      <h1 class="sub-header">Dinil Jayathilake</h1>
+      <h1 class="sub-header">{{user.first_name + ' ' + user.last_name}}</h1>
       <label for="file_input_id" class="edit-link" routerLink="/profile">Profile Details</label>
       <!-- <input type="file" id="file_input_id" (change)="selectImage($event)"> -->
     </div>

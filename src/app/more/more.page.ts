@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../_services/auth/auth.service';
+import { UserService } from '../_services/user/user.service';
 
 @Component({
   selector: 'app-more',
@@ -15,12 +16,26 @@ import { AuthService } from '../_services/auth/auth.service';
 })
 export class MorePage implements OnInit {
 
-  constructor(private authService : AuthService , private router: Router) { }
+  constructor(private authService : AuthService , private router: Router  , private userService : UserService) { }
 
   image: any = [];
   path = "";
+  email = "";
+
+  orginalUser: any = {};
+  user : any = {...this.orginalUser};
 
   ngOnInit() {
+    let email = '';
+    this.authService.currentData.subscribe(data => {
+      this.email = data.email;
+      email = data.email;
+    })
+
+    this.userService.getUser({email : email}).subscribe((user : any) => {
+      console.log(user)
+      this.user =  user;
+    })
   }
 
 

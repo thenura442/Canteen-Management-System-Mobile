@@ -5,21 +5,20 @@ import { IonicModule } from '@ionic/angular';
 import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
 import { ItemService } from '../_services/item/item.service';
 import { RouterLink } from '@angular/router';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 @Component({
   selector: 'app-browse',
   templateUrl: './browse.page.html',
   styleUrls: ['./browse.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent , RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent , RouterLink , LoaderComponent]
 })
 export class BrowsePage {
 
   constructor(private itemService : ItemService) { }
 
-  ionViewWillEnter() {
-
-  }
+  isLoading = true;
 
   search() {
     this.onEnter = false;
@@ -30,8 +29,12 @@ export class BrowsePage {
     else {
       this.isSearch = true;
     }
+    this.isLoading  = true;
     this.itemService.searchItemList({search : this.searchText}).subscribe((items : any) =>{
       console.log(items)
+      setTimeout(() =>{
+        this.isLoading = false;
+      }, 500 )
       this.isSearch = true;
       this.Items = items;
     })

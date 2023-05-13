@@ -11,44 +11,45 @@
   <div class="container">
     <div class="profile-div">
       <div class="inner-profile-div">
-        <img class="profile-img" src="./../../assets/profile pic.jpg">
+        <img class="profile-img" [src]="user.url">
+        <h1 style="position: absolute; top: 120px; right: 50px; background-color: #3CB371; border: 1px solid #3CB371; color: white; border-radius: 50px;">Hi</h1>
         <!-- *ngIf="user.url == 'https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/profile+pic.jpg'" -->
         <!-- <img class="profile-img" [src]="user.url" *ngIf="user.url != 'https://canteen-management-system-nsbm.s3.ap-south-1.amazonaws.com/profile+pic.jpg' "> -->
       </div>
     </div>
 
     <div class="portion">
-      <h1 class="sub-header">Dinil Jayathilake</h1>
+      <h1 class="sub-header">{{user.first_name +' '+user.last_name }}</h1>
       <label for="profile" style="margin-bottom: 10px;" class="edit-link" routerLink="/password">Change Password</label>
-      <label for="profile" class="edit-link">Edit Profile</label>
+      <label for="profile" class="edit-link" (click)="edit()">Edit Profile</label>
     </div>
 
     <form #form="ngForm">
         <div class="form-row">
-          <h3 class="form-header">Profile Details</h3>
           <div class="form-inner">
             <label class="form-label">First Name:</label>
-            <input class="form-input" required type="text" placeholder="Enter First Name" name="first-name" required ><br>
+            <input class="form-input" required type="text" readonly placeholder="First Name" name="fname" required [(ngModel)]="user.first_name"><br>
           </div>
           <div class="form-inner">
             <label class="form-label">Last Name:</label>
-            <input class="form-input" required type="text" placeholder="Enter First Name" name="first-name" required ><br>
+            <input class="form-input" required type="text" readonly placeholder="Last Name" name="lname" required  [(ngModel)]="user.last_name"><br>
           </div>
           <div class="form-inner">
             <label class="form-label">NIC:</label>
-            <input class="form-input" required type="text" placeholder="Enter First Name" name="first-name" required ><br>
+            <input class="form-input" required type="text" readonly placeholder="NIC" name="nic" required [(ngModel)]="user.nic"><br>
           </div>
           <div class="form-inner">
             <label class="form-label">Mobile:</label>
-            <input class="form-input" required type="text" placeholder="Enter First Name" name="first-name" required ><br>
+            <input class="form-input" required type="text" readonly placeholder="Mobile" name="mobile" required [(ngModel)]="user.mobile_no" *ngIf="!isEdit">
+            <input class="form-input" required type="text" placeholder="Mobile" name="mobile" required [(ngModel)]="user.mobile_no" *ngIf="isEdit"><br>
           </div>
         </div>
 
-      <div class="buttons-div">
+      <div class="buttons-div" *ngIf="isEdit">
         <!-- <button [ngClass]="updateTrue == true ? 'form-button' : 'disabled'" class="form-button" (click)="onDelete(form)">DELETE EMPLOYEE</button>
         <button [ngClass]="updateTrue == true ? 'form-button' : 'disabled'" class="form-button red" (click)="onCancel()">CANCEL</button> -->
-        <button class="form-button" >Update</button>
-        <button class="form-button red">Cancel</button>
+        <button class="update" (click)="Update()" >Update</button>
+        <button class="cancel" (click)="Cancel()">Cancel</button>
       </div>
     </form>
 

@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../_services/auth/auth.service';
+import { UserService } from '../_services/user/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,40 +16,40 @@ import { RouterLink } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  constructor(private router : Router, private authService: AuthService, private userService : UserService) { }
 
-  image: any = [];
-  path = "";
+  isEdit = false;
+  email = "";
+
+  orginalUser: any = {};
+  user : any = {...this.orginalUser};
 
   ngOnInit() {
+    let email = '';
+    this.authService.currentData.subscribe(data => {
+      this.email = data.email;
+      email = data.email;
+    })
+
+    this.userService.getUser({email : email}).subscribe((user : any) => {
+      console.log(user)
+      this.user =  user;
+    })
   }
 
-
-  selectImage(fileInput: any) {
-    this.image = fileInput.target.files;
-
-    if(this.image[0] == undefined) {
-      return
-    }
-
-    if(this.image[0] != undefined) {
-      const formData: any = new FormData();
-      formData.append('url',this.image[0])
-      // try{
-      //     this.uploadService.postFiles(formData).subscribe((result: any) => {
-      //     console.log(result.path);
-      //     console.log('hello')
-      //     this.path = result.path;
-      //     this.userService.updatePicture({email : this.user.email, url : this.path}).subscribe((pic:any) => {
-      //       console.log(pic);
-      //       this.user.url = pic.url;
-      //     })
-      //   })
-      // }
-      // catch(e) {
-      //   console.log(e);
-      // }
-    }
+  edit(){
+    this.isEdit = true;
   }
 
+  Update(){
+    this.userService.updateMobile({email : this.email , mobile_no : this.user.mobile_no}).subscribe(update => {
+      console.log(update);
+      this.isEdit = false;
+      this.router.navigateByUrl('/updated-profile');
+    })
+  }
+
+  Cancel(){
+    this.isEdit = false;
+  }
 }

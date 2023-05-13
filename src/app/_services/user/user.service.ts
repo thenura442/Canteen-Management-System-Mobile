@@ -14,4 +14,16 @@ export class UserService {
   getUser(email : any) : any{
     return this.http.post(URL+PATH+'get/id',email);
   }
+
+  getUserProfile(email : any) : any{
+    return this.http.post(URL+PATH+'get/id',email);
+  }
+
+  updateMobile (updateForm : any) {
+    return this.http.post(URL+PATH+'update/mobile', updateForm)
+  }
+
+  updatePass (updated : any) {
+    return this.http.post(URL+PATH+'update/password', updated)
+  }
 }

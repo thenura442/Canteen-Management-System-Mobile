@@ -1,38 +1,43 @@
 <ion-content [fullscreen]="true">
-
-  <div class="logo-container">
-    <form (ngSubmit)="display()" style="width: 100%;">
-      <ion-searchbar color="light" placeholder="Search Food or Drinks" debounce="500" (ionInput)="search()" name="search" [(ngModel)] = "searchText"></ion-searchbar>
-    </form>
-  </div>
-
-  <div class="container" >
-
-    <ion-list *ngIf="isSearch">
-      <ion-item *ngFor="let item of Items" style="display: flex; flex-direction: row; height: fit-content; cursor: pointer;" [routerLink]="['/item', item.id]">
-        <img style="width: 50px;" [src]="item.url" />
-        <ion-label style="padding: 10px 10px 10px 50px ;">{{ item.item_name }}</ion-label>
-      </ion-item>
-    </ion-list>
-
-    <div *ngIf="searchText === '' && onEnter === false" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; height: 80vh;">
-      Search Items
+  <div style="height: 100%; width: 100%;">
+    <div class="logo-container">
+      <form (ngSubmit)="display()" style="width: 100%;">
+        <ion-searchbar color="light" placeholder="Search Food or Drinks" debounce="500" (ionInput)="search()" name="search" [(ngModel)] = "searchText"></ion-searchbar>
+      </form>
     </div>
 
-    <div *ngIf="onEnter && displayItems !== [] " style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-      <ion-card class="card" *ngFor="let product of displayItems" [routerLink]="['/item', product.id]">
-        <img class="card-image" [src]="product.url" />
-        <ion-card-header>
-          <ion-card-title>{{product.item_name}}</ion-card-title>
-        </ion-card-header>
+    <div class="container" >
+      <ion-list *ngIf="isSearch">
+        <app-loader *ngIf="isLoading"></app-loader>
+        <div style="height: 100%; width: 100%;" *ngIf="!isLoading">
+          <ion-item *ngFor="let item of Items" style="display: flex; flex-direction: row; height: fit-content; cursor: pointer;" [routerLink]="['/item', item.id]">
+            <img style="width: 50px;" [src]="item.url" />
+            <ion-label style="padding: 10px 10px 10px 50px ;">{{ item.item_name }}</ion-label>
+          </ion-item>
+          <div style="height: 100%; width: 100%;" *ngIf="Items.length === 0">
+            No items found!
+          </div>
+        </div>
+      </ion-list>
 
-        <ion-card-content>
-          Here's a small text description for the card content. Nothing more, nothing less.
-        </ion-card-content>
-      </ion-card>
+      <div *ngIf="searchText === '' && onEnter === false" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; height: 80vh;">
+        Search Items
+      </div>
+
+      <div *ngIf="onEnter && displayItems !== [] " style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <ion-card class="card" *ngFor="let product of displayItems" [routerLink]="['/item', product.id]">
+          <img class="card-image" [src]="product.url" />
+          <ion-card-header>
+            <ion-card-title>{{product.item_name}}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+          </ion-card-content>
+        </ion-card>
+      </div>
     </div>
   </div>
-
 </ion-content>
 
 
