@@ -17,9 +17,6 @@ import { UserService } from '../_services/user/user.service';
 export class MorePage implements OnInit {
 
   constructor(private authService : AuthService , private router: Router  , private userService : UserService) { }
-
-  image: any = [];
-  path = "";
   email = "";
 
   orginalUser: any = {};
@@ -36,34 +33,6 @@ export class MorePage implements OnInit {
       console.log(user)
       this.user =  user;
     })
-  }
-
-
-  selectImage(fileInput: any) {
-    this.image = fileInput.target.files;
-
-    if(this.image[0] == undefined) {
-      return
-    }
-
-    if(this.image[0] != undefined) {
-      const formData: any = new FormData();
-      formData.append('url',this.image[0])
-      // try{
-      //     this.uploadService.postFiles(formData).subscribe((result: any) => {
-      //     console.log(result.path);
-      //     console.log('hello')
-      //     this.path = result.path;
-      //     this.userService.updatePicture({email : this.user.email, url : this.path}).subscribe((pic:any) => {
-      //       console.log(pic);
-      //       this.user.url = pic.url;
-      //     })
-      //   })
-      // }
-      // catch(e) {
-      //   console.log(e);
-      // }
-    }
   }
 
   logout(){
