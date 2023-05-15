@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { IPayPalConfig, ICreateOrderRequest, NgxPayPalModule } from 'ngx-paypal';
 
 import { CartService } from '../_services/cart/cart.service';
 import { Vendor } from '../_interfaces/vendor';
@@ -11,18 +12,77 @@ import { OrderService } from '../_services/order/order.service';
 import { AuthService } from '../_services/auth/auth.service';
 import { UserService } from '../_services/user/user.service';
 import { Router } from '@angular/router';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
   styleUrls: ['./checkout.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule , NgxPayPalModule , LoaderComponent],
   providers: [
     DatePipe
   ]
 })
 export class CheckoutPage implements OnInit{
+
+  public payPalConfig ? : IPayPalConfig;
+
+  private initConfig(): void {
+    this.payPalConfig = {
+    currency: 'USD',
+    clientId: 'ARikh31dzmeryRxNxTvKMnosuLYYvRZJbfaGxDNkv2sqrne3NP8bkDAE5ExBr8BHplayJeihz46dYluQ',
+    createOrderOnClient: (data) => <ICreateOrderRequest>{
+      intent: 'CAPTURE',
+      purchase_units: [
+        {
+          amount: {
+            currency_code: 'USD',
+            value: this.orderForm.total,
+            breakdown: {
+              item_total: {
+                currency_code: 'USD',
+                value: this.orderForm.total
+              }
+            }
+          }
+        }
+      ],
+      application_context: { shipping_preference: "NO_SHIPPING", }
+    },
+    advanced: {
+      commit: 'true'
+    },
+    style: {
+      label: 'paypal',
+      layout: 'vertical'
+    },
+    onApprove: (data, actions) => {
+      console.log('onApprove - transaction was approved, but not authorized', data, actions);
+      actions.order.get().then((details : any) => {
+        console.log('onApprove - you can get full order details inside onApprove: ', details);
+      });
+    },
+    onClientAuthorization: (data) => {
+      console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+      if(data.status === "COMPLETED"){
+        this.router.navigateByUrl('/order-confirmed');
+      }
+      else{
+
+      }
+    },
+    onCancel: (data, actions) => {
+      console.log('OnCancel', data, actions);
+    },
+    onError: err => {
+      console.log('OnError', err);
+    },
+    onClick: (data, actions) => {
+      console.log('onClick', data, actions);
+    },
+  };
+  }
 
   constructor(private router : Router ,private authService: AuthService, private orderService : OrderService, private datePipe: DatePipe, private cartService: CartService, private vendorService: VendorService , private userService : UserService) {}
 
@@ -64,7 +124,10 @@ export class CheckoutPage implements OnInit{
 
   vendorForm: Vendor = {...this.originalVendorForm}
 
+  pageLoading = true;
+
   ngOnInit(): void {
+    this.initConfig()
     let email = '';
     this.authService.currentData.subscribe(data => {
       email = data.email;
@@ -94,6 +157,10 @@ export class CheckoutPage implements OnInit{
       })
 
     })
+
+    setTimeout(() => {
+      this.pageLoading = false;
+    },800)
   }
 
   confirm(){

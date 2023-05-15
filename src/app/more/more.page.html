@@ -1,5 +1,6 @@
 <ion-content [fullscreen]="true">
-  <div class="container">
+  <app-loader *ngIf="pageLoading"></app-loader>
+  <div class="container" *ngIf="!pageLoading">
     <div class="profile-div">
       <div class="inner-profile-div">
         <img class="profile-img" [src]="user.url">

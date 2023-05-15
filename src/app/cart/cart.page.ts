@@ -9,13 +9,14 @@ import { Vendor } from '../_interfaces/vendor';
 import { Router } from '@angular/router';
 import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
 import { AuthService } from '../_services/auth/auth.service';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent]
+  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent , LoaderComponent]
 })
 export class CartPage{
 
@@ -26,6 +27,7 @@ export class CartPage{
 
   changed: boolean = false;
   email = '';
+  pageLoading = true;
 
   originalItemForm: Item = {
     customer_email: "",
@@ -84,6 +86,9 @@ export class CartPage{
         })
       }
     })
+    setTimeout(() => {
+      this.pageLoading = false;
+    }, 800)
   }
 
 

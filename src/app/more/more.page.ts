@@ -6,13 +6,14 @@ import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../_services/auth/auth.service';
 import { UserService } from '../_services/user/user.service';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 @Component({
   selector: 'app-more',
   templateUrl: './more.page.html',
   styleUrls: ['./more.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent , RouterLink ]
+  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent , RouterLink , LoaderComponent ]
 })
 export class MorePage implements OnInit {
 
@@ -21,6 +22,7 @@ export class MorePage implements OnInit {
 
   orginalUser: any = {};
   user : any = {...this.orginalUser};
+  pageLoading = true;
 
   ngOnInit() {
     let email = '';
@@ -33,6 +35,9 @@ export class MorePage implements OnInit {
       console.log(user)
       this.user =  user;
     })
+    setTimeout (() => {
+      this.pageLoading = false;
+    },500)
   }
 
   logout(){

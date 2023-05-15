@@ -6,13 +6,14 @@ import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../_services/auth/auth.service';
 import { UserService } from '../_services/user/user.service';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule , TabBarComponent , RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule , TabBarComponent , RouterLink , LoaderComponent]
 })
 export class ProfilePage implements OnInit {
 
@@ -20,6 +21,7 @@ export class ProfilePage implements OnInit {
 
   isEdit = false;
   email = "";
+  pageLoading = true;
 
   orginalUser: any = {};
   user : any = {...this.orginalUser};
@@ -35,6 +37,9 @@ export class ProfilePage implements OnInit {
       console.log(user)
       this.user =  user;
     })
+    setTimeout (() => {
+      this.pageLoading = false;
+    },500)
   }
 
   edit(){

@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <div style="height: 100%; width: 100%;">
+  <div style="height: 100%; width: 100%;" *ngIf="pageLoading">
     <div class="logo-container">
       <form (ngSubmit)="display()" style="width: 100%;">
         <ion-searchbar color="light" placeholder="Search Food or Drinks" debounce="500" (ionInput)="search()" name="search" [(ngModel)] = "searchText"></ion-searchbar>

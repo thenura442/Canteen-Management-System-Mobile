@@ -8,7 +8,9 @@
 
 
 <ion-content [fullscreen]="true">
-  <ion-img [src]="item.url" alt="Store Picture"></ion-img>
+  <app-loader *ngIf="pageLoading"></app-loader>
+  <div style="width: 100%;" *ngIf="!pageLoading">
+    <ion-img [src]="item.url" alt="Store Picture"></ion-img>
 
   <div class="container">
 
@@ -42,9 +44,10 @@
       <h3 style="background-color: rgb(245, 71, 71); border-radius: 50px; color: white; padding: 10px; font-size: 16px; font-weight: 600; text-align: center; line-height: 1.2;">Cart with Another Vendor is Ongoing!</h3>
     </div>
   </div>
+  </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="!pageLoading">
   <ion-toolbar class="add-to-cart" *ngIf="!added && sameCart">
     <div class="add" (click)="AddToCart()">
       <button class="btn-add">Add to Cart</button>

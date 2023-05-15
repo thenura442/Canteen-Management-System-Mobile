@@ -27,6 +27,7 @@
     "@ionic/angular": "^7.0.0",
     "@ionic/storage-angular": "^3.0.6",
     "ionicons": "^7.0.0",
+    "ngx-paypal": "^11.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -6,19 +6,21 @@ import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
 import { OrderService } from '../_services/order/order.service';
 import { AuthService } from '../_services/auth/auth.service';
 import { VendorService } from '../_services/vendor/vendor.service';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.page.html',
   styleUrls: ['./orders.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent]
+  imports: [IonicModule, CommonModule, FormsModule, TabBarComponent , LoaderComponent]
 })
 export class OrdersPage implements OnInit {
 
   constructor(private vendorService: VendorService, private orderService: OrderService , private authService: AuthService) { }
 
   email = "";
+  pageLoading = true;
 
   completedOrders : any = [];
 
@@ -42,6 +44,10 @@ export class OrdersPage implements OnInit {
         }
       }
     })
+
+    setTimeout(() => {
+      this.pageLoading = false;
+    },500)
   }
 
 }

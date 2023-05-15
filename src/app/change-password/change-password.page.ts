@@ -5,13 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../_services/auth/auth.service';
 import { UserService } from '../_services/user/user.service';
 import { Router } from '@angular/router';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.page.html',
   styleUrls: ['./change-password.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule , LoaderComponent ]
 })
 export class ChangePasswordPage implements OnInit {
 
@@ -19,6 +20,7 @@ export class ChangePasswordPage implements OnInit {
 
   isEdit = false;
   email = "";
+  pageLoading = true;
 
   orginalUser: any = {};
   user : any = {...this.orginalUser};
@@ -43,6 +45,10 @@ export class ChangePasswordPage implements OnInit {
     this.userService.getUser({email : email}).subscribe((user : any) => {
       this.user =  user;
     })
+    setTimeout (() => {
+      this.pageLoading = false;
+    },500)
+
   }
 
   edit(){

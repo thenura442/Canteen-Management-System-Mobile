@@ -19,6 +19,7 @@ export class BrowsePage {
   constructor(private itemService : ItemService) { }
 
   isLoading = true;
+  pageLoading = true;
 
   search() {
     this.onEnter = false;

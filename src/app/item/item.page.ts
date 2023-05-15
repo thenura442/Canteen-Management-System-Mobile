@@ -9,6 +9,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CartService } from '../_services/cart/cart.service';
 import { Item } from '../_interfaces/item';
 import { AuthService } from '../_services/auth/auth.service';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { AuthService } from '../_services/auth/auth.service';
   templateUrl: './item.page.html',
   styleUrls: ['./item.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink , LoaderComponent]
 })
 export class ItemPage implements OnInit {
 
@@ -24,6 +25,7 @@ export class ItemPage implements OnInit {
   item: any = "";
   added: boolean = false;
   sameCart: boolean = true;
+  pageLoading = true;
 
   originalItemForm: Item = {
     customer_email: "thenura114@gmail.com",
@@ -48,10 +50,7 @@ export class ItemPage implements OnInit {
     })
    }
 
-  ngOnInit(): void {
-  }
-
-   ionViewWillEnter(){
+   ngOnInit(){
 
     let email = '';
 
@@ -86,6 +85,10 @@ export class ItemPage implements OnInit {
       })
 
     })
+
+    setTimeout(() => {
+      this.pageLoading = false;
+    }, 800)
   }
 
   minus(){

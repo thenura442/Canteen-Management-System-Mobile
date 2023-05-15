@@ -8,7 +8,8 @@
 
 
 <ion-content [fullscreen]="true">
-  <div class="container" *ngIf="itemForm.store_email !== '' && itemForm !== null">
+  <app-loader *ngIf="pageLoading"></app-loader>
+  <div class="container" *ngIf="itemForm.store_email !== '' && itemForm !== null && !pageLoading">
     <h1 class="h1-vendor" style="margin-bottom: 5%;">{{ vendorForm.vendor_name }}</h1>
 
     <h1 style="margin-left: 3%; margin-right: 3%;"><img style="width: 100px;" [src]="vendorForm.url"></h1>

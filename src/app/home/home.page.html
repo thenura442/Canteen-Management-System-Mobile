@@ -1,6 +1,5 @@
 <ion-content [fullscreen]="true">
 
-
   <div class="logo-container">
     <img class="img-logo" src="./../../assets/logo-white.png">
     <div class="h1-div">
@@ -13,8 +12,8 @@
         <ion-title size="large">Blank</ion-title>
       </ion-toolbar>
     </ion-header> -->
-
-    <div class="container">
+    <app-loader *ngIf="pageLoading"></app-loader>
+    <div class="container" *ngIf="!pageLoading">
       <ion-card class="card" *ngFor="let store of stores" [routerLink]="['/store', store.email]">
         <img class="card-image" alt="Silhouette of mountains" [src]="store.url" />
         <ion-card-header>

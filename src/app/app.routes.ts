@@ -6,10 +6,10 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
   },
-  // {
-  //   path: 'loading',
-  //   loadComponent: () => import('./loading/loading.page').then( m => m.LoadingPage)
-  // },
+  {
+    path: 'loading',
+    loadComponent: () => import('./loading/loading.page').then( m => m.LoadingPage)
+  },
   {
     path: 'home',
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
@@ -62,7 +62,8 @@ export const routes: Routes = [
   {
     path: 'password',
     loadComponent: () => import('./change-password/change-password.page').then( m => m.ChangePasswordPage)
-  },  {
+  },
+  {
     path: 'updated-profile',
     loadComponent: () => import('./updated-profile/updated-profile.page').then( m => m.UpdatedProfilePage)
   },

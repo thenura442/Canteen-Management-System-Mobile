@@ -7,17 +7,19 @@ import { RouterLink } from '@angular/router';
 import { VendorService } from '../_services/vendor/vendor.service';
 import { ActivatedRoute } from '@angular/router';
 import { ItemService } from '../_services/item/item.service';
+import { LoaderComponent } from '../_components/loader/loader.component';
 
 @Component({
   selector: 'app-store',
   templateUrl: './store.page.html',
   styleUrls: ['./store.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule,RouterLink , LoaderComponent]
 })
 export class StorePage implements OnInit{
 
   store_email = "";
+  pageLoading = true;
 
   constructor(private vendorService : VendorService, private activatedRoute : ActivatedRoute, private itemService: ItemService) {
     this.activatedRoute.params.subscribe(parameter => {
@@ -52,6 +54,10 @@ export class StorePage implements OnInit{
         }
       }
     })
+
+    setTimeout(() =>{
+      this.pageLoading = false;
+    },800)
   }
 
   stores : any = [];

@@ -7,7 +7,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-img [src]="stores.url"></ion-img>
+  <app-loader *ngIf="pageLoading"></app-loader>
+  <div style="width: 100%;" *ngIf="!pageLoading">
+    <ion-img [src]="stores.url"></ion-img>
 
   <div class="container">
     <h1 class="h1-vendor">{{stores.vendor_name}}</h1>
@@ -146,5 +148,6 @@
         </ion-card-content>
       </ion-card>
     </div>
+  </div>
   </div>
 </ion-content>
