@@ -7,6 +7,8 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../_services/auth/auth.service';
 import { UserService } from '../_services/user/user.service';
 import { LoaderComponent } from '../_components/loader/loader.component';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-more',
@@ -17,7 +19,7 @@ import { LoaderComponent } from '../_components/loader/loader.component';
 })
 export class MorePage implements OnInit {
 
-  constructor(private authService : AuthService , private router: Router  , private userService : UserService) { }
+  constructor(private authService : AuthService , private router: Router  , private userService : UserService , private toastController: ToastController) { }
   email = "";
 
   orginalUser: any = {};
@@ -31,19 +33,28 @@ export class MorePage implements OnInit {
       email = data.email;
     })
 
-    this.userService.getUser({email : email}).subscribe((user : any) => {
+    this.userService.getUser({email : email}).subscribe(async(user : any) => {
       console.log(user)
-      this.user =  user;
+      this.user = await user;
     })
     setTimeout (() => {
       this.pageLoading = false;
     },500)
   }
 
-  logout(){
-    this.authService.logOut().subscribe((logout: any) => {
+  async logout(){
+    const toast = await this.toastController.create({
+      message: ' Logged Out Successfully! ',
+      duration: 1500,
+      position: "bottom",
+      cssClass : "toast-success"
+    });
+    await toast.present();
+
+    this.authService.logOut().subscribe(async(logout: any) => {
       console.log(logout);
     })
+
     this.router.navigateByUrl('/login');
   }
 }

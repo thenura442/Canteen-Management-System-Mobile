@@ -13,6 +13,8 @@ import { AuthService } from '../_services/auth/auth.service';
 import { UserService } from '../_services/user/user.service';
 import { Router } from '@angular/router';
 import { LoaderComponent } from '../_components/loader/loader.component';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-checkout',
@@ -28,7 +30,7 @@ export class CheckoutPage implements OnInit{
 
   public payPalConfig ? : IPayPalConfig;
 
-  private initConfig(): void {
+  private async initConfig() {
     this.payPalConfig = {
     currency: 'USD',
     clientId: 'ARikh31dzmeryRxNxTvKMnosuLYYvRZJbfaGxDNkv2sqrne3NP8bkDAE5ExBr8BHplayJeihz46dYluQ',
@@ -38,11 +40,11 @@ export class CheckoutPage implements OnInit{
         {
           amount: {
             currency_code: 'USD',
-            value: this.orderForm.total,
+            value: this.Total,
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: this.orderForm.total
+                value: this.Total
               }
             }
           }
@@ -63,13 +65,29 @@ export class CheckoutPage implements OnInit{
         console.log('onApprove - you can get full order details inside onApprove: ', details);
       });
     },
-    onClientAuthorization: (data) => {
+    onClientAuthorization: async(data) => {
       console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
       if(data.status === "COMPLETED"){
+        this.orderForm.payment_type = "card";
+        this.orderService.createOrder(this.orderForm).subscribe((result:any) => {
+          console.log(result)
+          if(result.id != null && result.id != undefined && result.id != "")
+          {
+            this.router.navigateByUrl('/order-confirmed');
+          }
+        })
         this.router.navigateByUrl('/order-confirmed');
       }
       else{
+        const toast = await this.toastController.create({
+          message: 'Payment Could not be Completed!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-info"
+        });
 
+        await toast.present();
+        return
       }
     },
     onCancel: (data, actions) => {
@@ -84,17 +102,17 @@ export class CheckoutPage implements OnInit{
   };
   }
 
-  constructor(private router : Router ,private authService: AuthService, private orderService : OrderService, private datePipe: DatePipe, private cartService: CartService, private vendorService: VendorService , private userService : UserService) {}
+  constructor(private toastController : ToastController , private router : Router ,private authService: AuthService, private orderService : OrderService, private datePipe: DatePipe, private cartService: CartService, private vendorService: VendorService , private userService : UserService) {}
 
   originalOrderForm: Order = {
     id: "",
-    customer_email: "thenura114@gmail.com",
+    customer_email: "",
     customer_name: "",
     store_name: "",
     store_url: "",
     store_email: "",
     sub_total: "",
-    payment_type: "",
+    payment_type: "cash",
     discount: "",
     total: "",
     date: "",
@@ -125,16 +143,30 @@ export class CheckoutPage implements OnInit{
   vendorForm: Vendor = {...this.originalVendorForm}
 
   pageLoading = true;
+  Total : String = "0";
 
   ngOnInit(): void {
-    this.initConfig()
     let email = '';
     this.authService.currentData.subscribe(data => {
       email = data.email;
     })
 
-    this.cartService.getCart({customer_email: email}).subscribe((result:any) => {
-      this.orderForm = result;
+    this.cartService.getCart({customer_email: email}).subscribe(async(result:any) => {
+      this.orderForm = await result;
+
+      if(!result?.customer_email){
+        const toast = await this.toastController.create({
+          message: 'Something Went Wrong Try Again Later!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-info"
+        });
+
+        await toast.present();
+        return
+      }
+
+      this.orderForm.customer_email = result.customer_email;
       let total = Number(result.sub_total) - 0;
       this.orderForm.total = total.toString();
 
@@ -145,16 +177,20 @@ export class CheckoutPage implements OnInit{
       this.orderForm.payment_type = "cash";
       this.orderForm.discount = "0";
       this.orderForm.status = "pending";
+      let Total = String(Number(this.orderForm.total)/200)
+      this.Total = String(Number(Total)*1.1)
 
-      this.vendorService.getVendor({email : result.store_email}).subscribe((vendor:any) => {
-        this.vendorForm = vendor;
+      this.vendorService.getVendor({email : result.store_email}).subscribe(async(vendor:any) => {
+        this.vendorForm = await vendor;
         this.orderForm.store_name = vendor.vendor_name;
         this.orderForm.store_url = vendor.url;
       })
 
-      this.userService.getUser({email: email}).subscribe((user : any) => {
-        this.orderForm.customer_name = user.first_name;
+      this.userService.getUser({email: email}).subscribe(async(user : any) => {
+        this.orderForm.customer_name = await user.first_name;
       })
+
+      this.initConfig()
 
     })
 
@@ -165,11 +201,11 @@ export class CheckoutPage implements OnInit{
 
   confirm(){
     this.orderService.createOrder(this.orderForm).subscribe((result:any) => {
+      console.log(result)
       if(result.id != null && result.id != undefined && result.id != "")
       {
         this.router.navigateByUrl('/order-confirmed');
       }
-      console.log(result);
     })
   }
 }

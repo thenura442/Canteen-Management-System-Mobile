@@ -7,6 +7,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../_services/auth/auth.service';
 import { UserService } from '../_services/user/user.service';
 import { LoaderComponent } from '../_components/loader/loader.component';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,7 @@ import { LoaderComponent } from '../_components/loader/loader.component';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private router : Router, private authService: AuthService, private userService : UserService) { }
+  constructor(private router : Router, private authService: AuthService, private userService : UserService ,  private toastController: ToastController) { }
 
   isEdit = false;
   email = "";
@@ -33,9 +34,9 @@ export class ProfilePage implements OnInit {
       email = data.email;
     })
 
-    this.userService.getUser({email : email}).subscribe((user : any) => {
+    this.userService.getUser({email : email}).subscribe(async(user : any) => {
       console.log(user)
-      this.user =  user;
+      this.user = await user;
     })
     setTimeout (() => {
       this.pageLoading = false;
@@ -47,14 +48,32 @@ export class ProfilePage implements OnInit {
   }
 
   Update(){
-    this.userService.updateMobile({email : this.email , mobile_no : this.user.mobile_no}).subscribe(update => {
-      console.log(update);
+    this.userService.updateMobile({email : this.email , mobile_no : this.user.mobile_no}).subscribe(async (update: any) => {
+      if(update?.message != "success"){
+        const toast = await this.toastController.create({
+          message: ' Something Went Wrong Try Again Later! ',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-info"
+        });
+        await toast.present();
+        return
+      }
+
       this.isEdit = false;
       this.router.navigateByUrl('/updated-profile');
     })
   }
 
-  Cancel(){
+  async Cancel(){
     this.isEdit = false;
+
+    const toast = await this.toastController.create({
+      message: ' Cancelled Profile Update! ',
+      duration: 1500,
+      position: "bottom",
+      cssClass : "toast-failure"
+    });
+    await toast.present();
   }
 }

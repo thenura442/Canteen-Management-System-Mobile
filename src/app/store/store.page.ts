@@ -28,8 +28,8 @@ export class StorePage implements OnInit{
    }
 
   ngOnInit(){
-    this.vendorService.getVendor({email: this.store_email}).subscribe((result : any) => {
-      this.stores = result;
+    this.vendorService.getVendor({email: this.store_email}).subscribe(async(result : any) => {
+      this.stores = await result;
     })
 
     this.itemService.getItems({email: this.store_email}).subscribe((result : any) => {
@@ -57,7 +57,7 @@ export class StorePage implements OnInit{
 
     setTimeout(() =>{
       this.pageLoading = false;
-    },800)
+    },600)
   }
 
   stores : any = [];

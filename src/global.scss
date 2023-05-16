@@ -24,3 +24,51 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+.toast-success {
+  --color:#ffffff;
+  --border-color:#3CB371;
+  --border-radius:3px;
+  --border-style:solid;
+  --border-width:3px;
+  --background: #3CB371;
+  --button-color:#ffffff;
+  --border-radius:50px;
+  --width: 90%;
+  --max-width: 400px;
+  font-size: 16px;
+  text-align : center;
+}
+
+
+.toast-failure {
+  --color:#ffffff;
+  --border-color:#EB445A;
+  --border-radius:3px;
+  --border-style:solid;
+  --border-width:3px;
+  --background: #EB445A;
+  --button-color:#ffffff;
+  --border-radius:50px;
+  --width: 90%;
+  --max-width: 400px;
+  font-size: 16px;
+  text-align : center;
+}
+
+
+.toast-info {
+  --color:#ffffff;
+  --border-color:#2572ff;
+  --border-radius:3px;
+  --border-style:solid;
+  --border-width:3px;
+  --background: #2572ff;
+  --button-color:#ffffff;
+  --border-radius:50px;
+  --width: 90%;
+  --max-width: 400px;
+  font-size: 16px;
+  text-align : center;
+}

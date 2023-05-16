@@ -10,6 +10,7 @@ import { CartService } from '../_services/cart/cart.service';
 import { Item } from '../_interfaces/item';
 import { AuthService } from '../_services/auth/auth.service';
 import { LoaderComponent } from '../_components/loader/loader.component';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class ItemPage implements OnInit {
   pageLoading = true;
 
   originalItemForm: Item = {
-    customer_email: "thenura114@gmail.com",
+    customer_email: "",
     store_email: "",
     sub_total: "",
     products: [{
@@ -44,9 +45,11 @@ export class ItemPage implements OnInit {
   itemForm: Item = {...this.originalItemForm}
 
 
-  constructor(private authService: AuthService, private itemService : ItemService, private location: Location , private activatedRoute : ActivatedRoute, private cartService: CartService) {
+  constructor(private authService: AuthService, private itemService : ItemService, private location: Location , private activatedRoute : ActivatedRoute, private cartService: CartService , private toastController : ToastController) {
     this.activatedRoute.params.subscribe(parameter => {
-      this.item_code = parameter['id']
+      let item_code = parameter['id']
+      this.item_code = item_code;
+
     })
    }
 
@@ -54,8 +57,8 @@ export class ItemPage implements OnInit {
 
     let email = '';
 
-    this.itemService.getItem({id: this.item_code}).subscribe((result : any) => {
-      this.item = result;
+    this.itemService.getItem({id: this.item_code}).subscribe(async(result : any) => {
+      this.item = await result;
       this.itemForm.products[0].id = result.id;
       this.itemForm.products[0].item_name = result.item_name;
       this.itemForm.products[0].price = result.price;
@@ -65,9 +68,10 @@ export class ItemPage implements OnInit {
 
       this.authService.currentData.subscribe(data => {
         email = data.email;
+        this.itemForm.customer_email = email;
       })
 
-      this.cartService.getCart({customer_email: email}).subscribe((cart : any) => {
+      this.cartService.getCart({customer_email: email}).subscribe(async(cart : any) => {
         if(cart == null){
           return;
         }
@@ -108,9 +112,32 @@ export class ItemPage implements OnInit {
 
   AddToCart(){
     this.itemForm.sub_total = this.itemForm.products[0].product_total;
+    this.cartService.addToCart(this.itemForm).subscribe(async(result : any) => {
+      if(result.message === "success"){
+        this.location.back();
+        const toast = await this.toastController.create({
+          message: 'Item Added to Cart!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-success"
+        });
 
-    this.cartService.addToCart(this.itemForm).subscribe((result : any) => {
-      this.location.back();
+        await toast.present();
+        return
+      }
+
+      if(result.message != "success"){
+        this.location.back();
+        const toast = await this.toastController.create({
+          message: 'Something Went Wrong Try Again Later!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-info"
+        });
+
+        await toast.present();
+        return
+      }
     })
   }
 

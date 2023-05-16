@@ -7,6 +7,7 @@ import { OrderService } from '../_services/order/order.service';
 import { AuthService } from '../_services/auth/auth.service';
 import { VendorService } from '../_services/vendor/vendor.service';
 import { LoaderComponent } from '../_components/loader/loader.component';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-orders',
@@ -17,7 +18,7 @@ import { LoaderComponent } from '../_components/loader/loader.component';
 })
 export class OrdersPage implements OnInit {
 
-  constructor(private vendorService: VendorService, private orderService: OrderService , private authService: AuthService) { }
+  constructor(private vendorService: VendorService, private orderService: OrderService , private authService: AuthService , private toastController : ToastController) { }
 
   email = "";
   pageLoading = true;
@@ -33,6 +34,41 @@ export class OrdersPage implements OnInit {
       this.email = data.email;
     })
 
+    this.reload(email);
+  }
+
+  Cancel(ID : any) {
+
+    this.orderService.updateStatus({ id : ID ,  status : "cancelled"}).subscribe(async(data:any)=> {
+      console.log(data)
+      if(data.message === "success"){
+        const toast = await this.toastController.create({
+          message: ' Order Updated! ',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-success"
+        });
+        await toast.present();
+        this.reload(this.email)
+        return
+      }
+
+      if(data.message === "success"){
+        const toast = await this.toastController.create({
+          message: 'Something Went Wrong Try Again Later! ',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-info"
+        });
+        await toast.present();
+        this.reload(this.email)
+        return
+      }
+    })
+  }
+
+  reload(email : any){
+    this.pageLoading = true;
     this.orderService.getOrders({email : email}).subscribe((orders : any) =>{
       console.log(orders)
       for(let i = 0; i < orders.length; i++){
@@ -43,11 +79,10 @@ export class OrdersPage implements OnInit {
           this.ongoingOrders.push(orders[i]);
         }
       }
+      setTimeout(() => {
+        this.pageLoading = false;
+      },500)
     })
-
-    setTimeout(() => {
-      this.pageLoading = false;
-    },500)
   }
 
 }

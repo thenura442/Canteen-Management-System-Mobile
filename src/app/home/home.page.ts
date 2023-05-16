@@ -26,11 +26,11 @@ export class HomePage implements OnInit {
 
 
   ngOnInit(){
-    this.vendorService.getVendors().subscribe((result : any) => {
-      this.stores = result;
+    this.vendorService.getVendors().subscribe(async (result : any) => {
+      this.stores = await result;
     })
 
-    this.authService.currentData.subscribe(data  =>{
+    this.authService.currentData.subscribe(async data  =>{
       if(data == null){
         this.router.navigateByUrl('/login');
       }

@@ -6,6 +6,7 @@ import { AuthService } from '../_services/auth/auth.service';
 import { UserService } from '../_services/user/user.service';
 import { Router } from '@angular/router';
 import { LoaderComponent } from '../_components/loader/loader.component';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-change-password',
@@ -16,7 +17,7 @@ import { LoaderComponent } from '../_components/loader/loader.component';
 })
 export class ChangePasswordPage implements OnInit {
 
-  constructor(private router :Router, private authService: AuthService, private userService : UserService) { }
+  constructor(private router :Router, private authService: AuthService, private userService : UserService , private toastController: ToastController) { }
 
   isEdit = false;
   email = "";
@@ -57,17 +58,31 @@ export class ChangePasswordPage implements OnInit {
 
   Update(){
     if(this.pass.new_password === this.pass.retype_new_password){
-      this.userService.updatePass(this.pass).subscribe(update => {
-        console.log(update);
+      this.userService.updatePass(this.pass).subscribe(async(update:any) => {
+        if(update?.message != "success"){
+          const toast = await this.toastController.create({
+            message: ' Something Went Wrong Try Again Later! ',
+            duration: 1500,
+            position: "bottom",
+            cssClass : "toast-info"
+          });
+          await toast.present();
+          return
+        }
         this.isEdit = false;
         this.router.navigateByUrl('/updated-profile');
       })
     }
   }
 
-  Cancel(){
+  async Cancel(){
     this.isEdit = false;
+    const toast = await this.toastController.create({
+      message: ' Cancelled Profile Update! ',
+      duration: 1500,
+      position: "bottom",
+      cssClass : "toast-failure"
+    });
+    await toast.present();
   }
-
-
 }

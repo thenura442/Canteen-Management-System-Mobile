@@ -18,4 +18,8 @@ export class OrderService {
   getOrders(user : any) {
     return this.http.post(URL+PATH+'get/user/orders',user);
   }
+
+  updateStatus(status : any) {
+    return this.http.post(URL+PATH+'update/status',status);
+  }
 }

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { TabBarComponent } from '../_components/tab-bar/tab-bar.component';
 import { AuthService } from '../_services/auth/auth.service';
 import { LoaderComponent } from '../_components/loader/loader.component';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cart',
@@ -20,7 +21,7 @@ import { LoaderComponent } from '../_components/loader/loader.component';
 })
 export class CartPage{
 
-  constructor(private authService: AuthService ,private router: Router, private cartService: CartService, private vendorService : VendorService) {}
+  constructor(private authService: AuthService ,private router: Router, private cartService: CartService, private vendorService : VendorService , private toastController : ToastController) {}
 
   ngOnInit() {
   }
@@ -69,20 +70,21 @@ export class CartPage{
       this.email = data.email;
     })
 
-    this.cartService.getCart({customer_email: email}).subscribe((result : any) => {
+    this.cartService.getCart({customer_email: email}).subscribe(async(result : any) => {
       if(result == null){
+        this.itemForm = {...this.originalItemForm}
         return;
       }
       if(result?.customer_email){
-        this.itemForm = result;
+        this.itemForm = await result;
         this.items = 0;
         this.categories = 0;
         for(let i = 0; i < result.products.length; i++){
           this.categories = this.categories + 1;
           this.items = this.items + Number(result.products[i].quantity)
         }
-        this.vendorService.getVendor({email: result.store_email}).subscribe((vendor : any) => {
-          this.vendorForm = vendor;
+        this.vendorService.getVendor({email: result.store_email}).subscribe(async(vendor : any) => {
+          this.vendorForm = await vendor;
         })
       }
     })
@@ -125,10 +127,31 @@ export class CartPage{
 
   remove(item_id : any){
     let id = item_id;
-    this.cartService.deleteItem({id:id, customer_email: this.itemForm.customer_email}).subscribe((result : any) => {
+    this.cartService.deleteItem({id:id, customer_email: this.itemForm.customer_email}).subscribe(async(result : any) => {
       this.reload();
-      if(result.deletedCount == 1){
-        this.itemForm = {...this.originalItemForm}
+      if(result.message === "success"){
+        this.reload();
+        const toast = await this.toastController.create({
+          message: 'Item Removed from Cart Successfully!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-success"
+        });
+
+        await toast.present();
+        return
+      }
+      if(result.message != "success"){
+        this.reload();
+        const toast = await this.toastController.create({
+          message: 'Something Went Wrong!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-info"
+        });
+
+        await toast.present();
+        return
       }
     })
   }
@@ -136,8 +159,33 @@ export class CartPage{
 
   update(){
     this.changed = false;
-    this.cartService.updateCart(this.itemForm).subscribe((result : any) => {
-      this.reload();
+    this.cartService.updateCart(this.itemForm).subscribe(async(result : any) => {
+      if(result.sub_total === this.itemForm.sub_total){
+        this.reload();
+        const toast = await this.toastController.create({
+          message: 'Cart Updated Successfully!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-success"
+        });
+
+        await toast.present();
+        return
+      }
+
+      if(result.sub_total != this.itemForm.sub_total){
+        this.reload();
+        const toast = await this.toastController.create({
+          message: 'Something Went Wrong Try Again Later!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-info"
+        });
+
+        await toast.present();
+        return
+      }
+
     })
   }
 
@@ -147,8 +195,9 @@ export class CartPage{
 
 
   reload(){
-    this.cartService.getCart({customer_email: "thenura114@gmail.com"}).subscribe((result : any) => {
+    this.cartService.getCart({customer_email: "thenura114@gmail.com"}).subscribe(async(result : any) => {
       if(result == null){
+        this.itemForm = {...this.originalItemForm}
         return;
       }
       if(result?.customer_email){
@@ -159,6 +208,19 @@ export class CartPage{
           this.categories = this.categories + 1;
           this.items = this.items + Number(result.products[i].quantity)
         }
+      }
+
+      if(result != null && !result?.customer_email){
+        this.reload();
+        const toast = await this.toastController.create({
+          message: 'Something Went Wrong Try Again Later!',
+          duration: 1500,
+          position: "bottom",
+          cssClass : "toast-info"
+        });
+
+        await toast.present();
+        return
       }
     })
   }
