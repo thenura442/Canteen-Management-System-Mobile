@@ -11,11 +11,19 @@
 
     <div class="portion">
       <h1 class="sub-header">{{user.first_name + ' ' + user.last_name}}</h1>
-      <label for="file_input_id" class="edit-link" routerLink="/profile">Profile Details</label>
       <!-- <input type="file" id="file_input_id" (change)="selectImage($event)"> -->
     </div>
 
-    <ion-list class="ion-list">
+    <ion-list class="ion-list" routerLink="/profile">
+      <div class="ion-list-div">
+        <img class="img" src="./../../assets/profile.jpg"/>
+      </div>
+      <ion-item  class="ion-item">
+        <ion-label class="ion-label">Profile</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="ion-list" routerLink="/about">
       <div class="ion-list-div">
         <img class="img" src="./../../assets/about.svg"/>
       </div>
@@ -24,7 +32,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-list class="ion-list">
+    <ion-list class="ion-list" routerLink="/help-us">
       <div class="ion-list-div">
         <img class="img" src="./../../assets/help.svg"/>
       </div>

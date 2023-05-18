@@ -65,6 +65,12 @@
       <button *ngIf="changed" class="checkout-btn" (click)="update()">Update Cart</button>
     </div>
   </div>
+  <div *ngIf="emptyCart">
+    <div class="container-no middle">
+      <img style="height: 130px; width: 120%;" src="./../../assets/Cart2.jpg">
+      <h3 style="margin-top: 30px; font-size: 18px; color: rgb(83, 83, 83);">Cart Is Empty</h3>
+    </div>
+  </div>
 </ion-content>
 
 

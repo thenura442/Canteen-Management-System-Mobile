@@ -8,8 +8,8 @@
 
 <ion-content [fullscreen]="true">
   <app-loader *ngIf="pageLoading"></app-loader>
-  <div class="container" *ngIf="!pageLoading">
-    <h1 class="h1-vendor" style="margin-bottom: 5%;">{{ "Ongoing" }}</h1>
+  <div class="container" *ngIf="!pageLoading && empty === false">
+    <h1 *ngIf="ongoingOrders.length > 0" class="h1-vendor" style="margin-bottom: 5%;">{{ "Ongoing" }}</h1>
 
     <div class="item-container">
       <ion-card *ngFor="let order of ongoingOrders">
@@ -30,7 +30,9 @@
           </div>
         </div>
         <div class="status-div">
-          <h5 class="status">{{order.status | titlecase}}</h5>
+          <h5 *ngIf="order.status === 'pending'" class="status pending">{{order.status | titlecase}}</h5>
+          <h5 *ngIf="order.status === 'in progress'" class="status progress">{{order.status | titlecase}}</h5>
+          <h5 *ngIf="order.status === 'pick up'" class="status pick">{{order.status | titlecase}}</h5>
         </div>
         <div class="upper-image">
           <img style="width: 100%; height: auto;" [src]="order.store_url">
@@ -73,7 +75,7 @@
     </div>
 
 
-    <h1 class="h1" style="margin-bottom: 5%;">{{ "Completed" }}</h1>
+    <h1 *ngIf="completedOrders.length > 0" class="h1" style="margin-bottom: 5%;">{{ "Completed" }}</h1>
 
     <div class="item-container" *ngFor="let order of completedOrders">
       <ion-card>
@@ -94,7 +96,8 @@
           </div>
         </div>
         <div class="status-div">
-          <h5 class="status">{{order.status | titlecase}}</h5>
+          <h5 *ngIf="order.status === 'completed'" class="status completed">{{order.status | titlecase}}</h5>
+          <h5 *ngIf="order.status === 'rejected' || order.status === 'cancelled'" class="status cancel-reject">{{order.status | titlecase}}</h5>
         </div>
         <div class="upper-image">
           <img style="width: 100%; height: auto;" [src]="order.store_url">
@@ -135,6 +138,11 @@
       </ion-card>
 
     </div>
+  </div>
+
+  <div class="container" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; height: 80vh;" *ngIf="!pageLoading && empty===true">
+      <img style="height: 130px;" src="./../../assets/no-food.png">
+      <p style="margin-top: 50px; font-size: 18px; color: rgb(83, 83, 83);">No Orders Yet</p>
   </div>
 </ion-content>
 

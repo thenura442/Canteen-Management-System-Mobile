@@ -45,6 +45,7 @@ export class CartPage{
   };
 
   itemForm: Item = {...this.originalItemForm}
+  emptyCart = false;
 
 
   originalVendorForm: Vendor = {
@@ -72,10 +73,12 @@ export class CartPage{
 
     this.cartService.getCart({customer_email: email}).subscribe(async(result : any) => {
       if(result == null){
+        this.emptyCart = true;
         this.itemForm = {...this.originalItemForm}
         return;
       }
       if(result?.customer_email){
+        this.emptyCart = false;
         this.itemForm = await result;
         this.items = 0;
         this.categories = 0;
@@ -196,8 +199,9 @@ export class CartPage{
 
   reload(){
     this.cartService.getCart({customer_email: "thenura114@gmail.com"}).subscribe(async(result : any) => {
-      if(result == null){
+      if(result == null || result.products.length === 0){
         this.itemForm = {...this.originalItemForm}
+        this.emptyCart = true
         return;
       }
       if(result?.customer_email){

@@ -27,6 +27,27 @@ ion-card {
   margin-bottom: 50px;
 }
 
+.pending {
+  color: #F6B445;
+}
+
+.progress {
+  color: #56BCE8;
+}
+
+.pick {
+  color: #B702F6;
+}
+
+.completed {
+  color: #3CB371;
+}
+
+.cancel-reject {
+  color: #E8565B;
+}
+
+
 
 .item-container {
   display: flex;
@@ -62,7 +83,6 @@ ion-card {
 }
 
 .status {
-  color: #F6B445;
   font-size: 22px;
   font-weight: 500;
   padding: 10px 0px 0px 0px;
@@ -116,6 +136,7 @@ ion-card {
   flex-direction: row;
   width: 100%;
   justify-content: center;
+  align-items: center;
   height: fit-content;
   margin: 10px 0px 0px 0px;
   padding: 10px 10px 0px 10px;

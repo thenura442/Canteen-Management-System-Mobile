@@ -30,21 +30,22 @@ export class CheckoutPage implements OnInit{
 
   public payPalConfig ? : IPayPalConfig;
 
-  private async initConfig() {
+  private async initConfig(merchant : any) {
+    let merchant_id : string = merchant;
     this.payPalConfig = {
     currency: 'USD',
-    clientId: 'ARikh31dzmeryRxNxTvKMnosuLYYvRZJbfaGxDNkv2sqrne3NP8bkDAE5ExBr8BHplayJeihz46dYluQ',
+    clientId: merchant_id,
     createOrderOnClient: (data) => <ICreateOrderRequest>{
       intent: 'CAPTURE',
       purchase_units: [
         {
           amount: {
             currency_code: 'USD',
-            value: this.Total,
+            value: this.orderForm.total,
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: this.Total
+                value: this.orderForm.total
               }
             }
           }
@@ -180,19 +181,25 @@ export class CheckoutPage implements OnInit{
       let Total = String(Number(this.orderForm.total)/200)
       this.Total = String(Number(Total)*1.1)
 
+      let merchant = ""
       this.vendorService.getVendor({email : result.store_email}).subscribe(async(vendor:any) => {
+        console.log(vendor)
         this.vendorForm = await vendor;
         this.orderForm.store_name = vendor.vendor_name;
         this.orderForm.store_url = vendor.url;
       })
 
+      this.vendorService.getVendorMerchant({email : result.store_email}).subscribe(async(merchant:any) => {
+        merchant = merchant.merchant_id;
+        this.initConfig(merchant)
+      })
+
       this.userService.getUser({email: email}).subscribe(async(user : any) => {
         this.orderForm.customer_name = await user.first_name;
       })
-
-      this.initConfig()
-
     })
+
+
 
     setTimeout(() => {
       this.pageLoading = false;

@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ion-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <ion-title>About</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-loader *ngIf="pageLoading"></app-loader>
+  <div class="container" *ngIf="!pageLoading">
+
+    <div class="portion">
+      This Application is about running a n-eats mobile app
+    </div>
+  </div>
+</ion-content>

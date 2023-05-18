@@ -20,6 +20,7 @@ export class StorePage implements OnInit{
 
   store_email = "";
   pageLoading = true;
+  empty = true;
 
   constructor(private vendorService : VendorService, private activatedRoute : ActivatedRoute, private itemService: ItemService) {
     this.activatedRoute.params.subscribe(parameter => {
@@ -33,6 +34,14 @@ export class StorePage implements OnInit{
     })
 
     this.itemService.getItems({email: this.store_email}).subscribe((result : any) => {
+      if(result === 0) {
+        this.empty = true;
+        return
+      }
+      if(result.length > 0){
+        this.empty = false;
+      }
+
       for(let i = 0; i < result.length; i++){
         if(result[i].type === 'item' && result[i].meal_type === 'snack'){
           this.snack.push(result[i]);

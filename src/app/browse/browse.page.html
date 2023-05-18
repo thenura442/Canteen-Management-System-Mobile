@@ -14,14 +14,15 @@
             <img style="width: 50px;" [src]="item.url" />
             <ion-label style="padding: 10px 10px 10px 50px ;">{{ item.item_name }}</ion-label>
           </ion-item>
-          <div style="height: 100%; width: 100%;" *ngIf="Items.length === 0">
+          <div style="height: 100%; width: 100%; text-align: center;" *ngIf="Items.length === 0">
             No items found!
           </div>
         </div>
       </ion-list>
 
       <div *ngIf="searchText === '' && onEnter === false" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; height: 80vh;">
-        Search Items
+        <img style="height: 130px;" src="./../../assets/browse_items.png">
+        <p style="margin-top: 50px; font-size: 18px; color: rgb(83, 83, 83);">Search Items</p>
       </div>
 
       <div *ngIf="onEnter && displayItems !== [] " style="display: flex; flex-direction: column; justify-content: center; align-items: center;">

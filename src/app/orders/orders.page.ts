@@ -24,6 +24,7 @@ export class OrdersPage implements OnInit {
   pageLoading = true;
 
   completedOrders : any = [];
+  empty = false;
 
   ongoingOrders : any = [];
 
@@ -70,7 +71,14 @@ export class OrdersPage implements OnInit {
   reload(email : any){
     this.pageLoading = true;
     this.orderService.getOrders({email : email}).subscribe((orders : any) =>{
-      console.log(orders)
+      if(orders.length === 0){
+        this.empty = true;
+        this.pageLoading = false;
+        return;
+      }
+      if(orders.length > 0){
+        this.empty = false;
+      }
       for(let i = 0; i < orders.length; i++){
         if(orders[i].status === 'completed' || orders[i].status === 'rejected' || orders[i].status === 'cancelled'){
           this.completedOrders.push(orders[i]);
