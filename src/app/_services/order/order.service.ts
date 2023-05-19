@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const URL = 'http://localhost:5500/';
+const URL = 'https://cms-backend-d9n7.onrender.com/';
 const PATH = 'api/order/';
 
 @Injectable({
