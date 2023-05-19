@@ -1,0 +1,19 @@
+<ion-content [fullscreen]="true">
+  <div class="loader-container">
+    <ion-img src="./../../assets/logo-white.png" alt="Logo Picture"></ion-img>
+
+    <div class="form-container">
+      <form>
+        <h3 style="font-size: 16px; font-weight: 500; color: rgb(83, 83, 83); text-align: center; margin-bottom: 20px;">Please Enter the Email Account associated with our system to reset the password</h3>
+        <input class="form-input" type="text" required placeholder="Enter Linked Email" name="email" >
+        <div class="buttons-div">
+          <button class="form-button">Search</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="link" routerLink="/login">
+      <a href="#">Login?</a>
+    </div>
+  </div>
+</ion-content>

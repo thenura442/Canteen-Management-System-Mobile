@@ -74,7 +74,11 @@ export const routes: Routes = [
   {
     path: 'help-us',
     loadComponent: () => import('./help-us/help-us.page').then( m => m.HelpUsPage)
+  },  {
+    path: 'forgot-pass',
+    loadComponent: () => import('./forgot-pass/forgot-pass.page').then( m => m.ForgotPassPage)
   },
+
 
 
 

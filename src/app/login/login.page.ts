@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule , Location} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../_services/auth/auth.service';
 import { ToastController } from '@ionic/angular';
 
@@ -15,7 +15,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private authService: AuthService, private location : Location, private toastController: ToastController) { }
+  constructor(private authService: AuthService, private location : Location, private toastController: ToastController , private router : Router) { }
 
   ngOnInit() {
   }
@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
 
         await toast.present();
 
-        this.location.back();
+        this.router.navigateByUrl('/home')
         return
       }
       if(result.Error === "Email or Password is Incorrect"){
