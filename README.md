@@ -16,7 +16,7 @@ This project aims to provide an efficient, accessible, and user-friendly platfor
 - Clone the repository to a designated location on your device.
 - Open the project.
 - Run npm i to install required dependancies
-- Clone the backend as well and run npm i ([Canteen Management System Frontend](https://github.com/thenura442/Canteen-Management-System-Backend/))
+- Clone the backend as well and run npm i ([Canteen Management System Backend](https://github.com/thenura442/Canteen-Management-System-Backend/))
 - Once both repositories are running you should now be able to run the project without any issues.
 
 
